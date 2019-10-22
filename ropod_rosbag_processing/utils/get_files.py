@@ -54,14 +54,38 @@ def copy(source, destination):
                 add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
 
 
+def move(source, destination):
+    bagfiles = get_bagfiles(source)
+    print("Bagfiles in source\n", bagfiles)
+
+    copied_bagfiles_names = get_bagfile_names(bagfile_bookkepper)
+    print("Bagfiles already copied\n", copied_bagfiles_names)
+
+    for bagfile in bagfiles:
+        bagfile_name = bagfile.split('/')[-1]
+
+        if bagfile_name not in copied_bagfiles_names:
+            print("Moving {} to {}".format(bagfile, destination))
+            shutil.move(bagfile, destination)
+
+            if destination == WORKSTATION_DIR:
+                add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('action', type=str, action='store', help='Action to perform', choices=['cp', 'mv'])
     parser.add_argument('source', type=str, action='store', help='Path to the bagfile source directory')
     parser.add_argument('destination', type=str, action='store', help='Path to the bagfile destination directory')
 
     args = parser.parse_args()
 
-    copy(args.source, args.destination)
+    if args.action == 'cp':
+        copy(args.source, args.destination)
+    elif args.action == 'mv':
+        move(args.source, args.destination)
+
+
 
 
 
