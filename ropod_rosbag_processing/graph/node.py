@@ -2,10 +2,9 @@ from ropod_rosbag_processing.pose import Pose
 
 
 class TravelNode:
-    def __init__(self, name, pose, radius=0.3):
+    def __init__(self, name, pose):
         self.name = name
         self.pose = pose
-        self.radius = radius
 
     def __str__(self):
         to_print = ""
@@ -38,3 +37,13 @@ class TravelNode:
         travel_node_dict['pose'] = [self.pose.x, self.pose.y, self.pose.z]
         return travel_node_dict
 
+    @staticmethod
+    def get_travel_nodes(nodes_dict):
+        nodes = list()
+        for name, pose in nodes_dict.items():
+            travel_node = TravelNode.from_dict({'name': name,
+                                                'pose': pose})
+            print(travel_node)
+            nodes.append(travel_node)
+
+        return nodes
