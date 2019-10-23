@@ -13,7 +13,10 @@ bag_dir = "../../input/"
 #bag = rosbag.Bag(bag_dir + '20190510_hochschulstrasse.bag')
 #bag = rosbag.Bag(bag_dir + '20190314_maneuver_navigation_brsu_success.bag')
 #bag = rosbag.Bag(bag_dir + '_2019-09-30-12-53-15_2.bag')
-bag = rosbag.Bag(bag_dir + '_2019-09-30-13-08-39_0.bag')
+
+bag_root = '_2019-09-30-13-08-39_0'
+bag_name = bag_root + '.bag'
+bag = rosbag.Bag(bag_dir + bag_name)
 
 # ERRORs
 #bag = rosbag.Bag(bag_dir + '20190523_hochschul_nav_robosense_sunlight.bag')
@@ -40,16 +43,7 @@ for topic, msg, cur_time in bag.read_messages():
 
 print(travel_logger.get_history())
 edge_histories = travel_logger.get_history_dict()
-print('\n\n')
-for edge_history in edge_histories.values():
-    first_edge = True
-    count = 1
-    for edge in edge_history:
-        if first_edge:
-            print(edge.name)
-            first_edge = False
-        print(count, edge.get_time_traveled_string(), edge.get_dist_traveled_string())
-        count += 1
+travel_logger.to_file(file_suffix = (bag_root + ".txt"))
 
 
 #for topic in seen_topics:
