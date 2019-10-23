@@ -26,7 +26,7 @@ def get_bagfiles(path):
     for root, directories, files in os.walk(path):
         for file in files:
             if file.endswith('.bag'):
-                bagfiles.append(os.path.join(root, file))
+                bagfiles.append(os.path.join(file))
     return bagfiles
 
 
@@ -48,7 +48,7 @@ def copy(source, destination):
 
         if bagfile_name not in copied_bagfiles_names:
             print("Copying {} to {}".format(bagfile, destination))
-            shutil.copy(bagfile, destination)
+            shutil.copy(source + '/' + bagfile, destination)
 
             if destination == WORKSTATION_DIR:
                 add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
@@ -82,7 +82,7 @@ def move(source, destination):
 
         if bagfile_name not in copied_bagfiles_names:
             print("Moving {} to {}".format(bagfile, destination))
-            shutil.move(bagfile, destination)
+            shutil.move(source + '/' + bagfile, destination)
 
             if destination == WORKSTATION_DIR:
                 add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])

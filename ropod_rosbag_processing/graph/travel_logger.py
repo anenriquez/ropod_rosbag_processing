@@ -62,11 +62,18 @@ class TravelLogger:
             out_dir = dir_name + "/" + edge_name
             if not os.path.exists(out_dir):
                 os.makedirs(out_dir)
-                with open(out_dir + "/HEADER.txt", 'w') as header_file:  # Use file to refer to the file object
+                with open(out_dir + "/HEADER.info", 'w') as header_file:  # Use file to refer to the file object
                     header_file.write("HEADER INFO: " + first_edge.get_edge_name() + " " + first_edge.get_dist_traveled_string() + "\n")
+                    header_file.write("NODE NAMES: " + first_edge.start_node.name + " " + first_edge.end_node.name + "\n")
+                    header_file.write("POSITIONS" + str(first_edge.start_node.pose) + " " + str(first_edge.end_node.pose) + "\n")
             out_dest = out_dir + "/" + edge_name + file_suffix
 
             with open(out_dest, 'w') as out_file:  # Use file to refer to the file object
                 for edge in edge_history:
                     out_file.write(str(int(edge.start_time.to_sec())) + " " + str(edge.get_time_traveled()) + "\n")
+
+
+
+
+
 
