@@ -7,9 +7,9 @@ import argparse
 bagfile_bookkepper = "bookkeeper.csv"
 
 # Directories to put bagfiles
-ROBOT_DIR = '/home/angela/Documents/MAS/robot'
-USB_DIR = '/home/angela/Documents/MAS/usb/'
-WORKSTATION_DIR = '/home/angela/Documents/MAS/workstation/'
+ROBOT_DIR = 'home/narko5/.ros/gbot/bag/'
+USB_DIR = 'guido_bags/'
+WORKSTATION_DIR = 'home/ropod/guido_bags/'
 
 
 def get_bagfile_names(file):
@@ -38,20 +38,23 @@ def add_bagfile_to_register(register, file_name):
 
 def copy(source, destination):
     bagfiles = get_bagfiles(source)
-    print("Bagfiles in source\n", bagfiles)
+    print("Bagfiles in source: ", len(bagfiles))
 
     copied_bagfiles_names = get_bagfile_names(bagfile_bookkepper)
     print("Bagfiles already copied\n", copied_bagfiles_names)
 
-    for bagfile in bagfiles:
-        bagfile_name = bagfile.split('/')[-1]
+    n_copied_files = 0
 
-        if bagfile_name not in copied_bagfiles_names:
+    for bagfile in bagfiles:
+        if bagfile not in copied_bagfiles_names:
             print("Copying {} to {}".format(bagfile, destination))
             shutil.copy(source + '/' + bagfile, destination)
 
             if destination == WORKSTATION_DIR:
                 add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
+
+            n_copied_files += 1
+        print("Number of copied files: {}/{}".format(n_copied_files, len(bagfiles)))
 
 
 def get_source(source_name):
@@ -72,20 +75,27 @@ def get_destination(destination_name):
 
 def move(source, destination):
     bagfiles = get_bagfiles(source)
-    print("Bagfiles in source\n", bagfiles)
+    print("Bagfiles in source: ", len(bagfiles))
 
     copied_bagfiles_names = get_bagfile_names(bagfile_bookkepper)
     print("Bagfiles already copied\n", copied_bagfiles_names)
 
+    n_copied_files = 0
+
     for bagfile in bagfiles:
-        bagfile_name = bagfile.split('/')[-1]
-
-        if bagfile_name not in copied_bagfiles_names:
+        if bagfile not in copied_bagfiles_names:
             print("Moving {} to {}".format(bagfile, destination))
-            shutil.move(source + '/' + bagfile, destination)
+            try:
+                shutil.move(source + '/' + bagfile, destination)
 
-            if destination == WORKSTATION_DIR:
-                add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
+                if destination == WORKSTATION_DIR:
+                    add_bagfile_to_register(bagfile_bookkepper, bagfile)
+
+                n_copied_files += 1
+
+            except shutil.Error as err:
+                print("The file already exists in the destination")
+        print("Number of copied files: {}/{}".format(n_copied_files, len(bagfiles)))
 
 
 if __name__ == '__main__':
