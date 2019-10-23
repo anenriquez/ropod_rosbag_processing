@@ -8,3 +8,13 @@ Install the package:
 ```
 pip3 install --user -e .
 ```
+
+### Copy files
+```
+python3 get_files.py cp robot usb
+```
+
+### Move files
+```
+python3 get_files.py mv usb workstation
+```
