@@ -1,6 +1,8 @@
 from ropod_rosbag_processing.graph.edge import TravelEdge
 from ropod_rosbag_processing.graph.node import TravelNode
 from ropod_rosbag_processing.pose import Pose
+import os
+NS_TO_MS = 1000000
 
 class TravelLogger:
     def __init__(self, nodes_of_interest, event_radius=.3, event_threshold=.1):
@@ -47,3 +49,24 @@ class TravelLogger:
             history += str(edge)
 
         return history
+
+    def to_file(self, dir_name="travel_log_output", file_suffix=".txt"):
+        edge_histories = self.get_history_dict()
+        if not os.path.exists(dir_name):
+            os.makedirs(dir_name)
+
+        for edge_history in edge_histories.values():
+            first_edge = edge_history[0]
+            edge_name = first_edge.get_edge_name()
+
+            out_dir = dir_name + "/" + edge_name
+            if not os.path.exists(out_dir):
+                os.makedirs(out_dir)
+                with open(out_dir + "/HEADER.txt", 'w') as header_file:  # Use file to refer to the file object
+                    header_file.write("HEADER INFO: " + first_edge.get_edge_name() + " " + first_edge.get_dist_traveled_string() + "\n")
+            out_dest = out_dir + "/" + edge_name + file_suffix
+
+            with open(out_dest, 'w') as out_file:  # Use file to refer to the file object
+                for edge in edge_history:
+                    out_file.write(str(int(edge.start_time.to_sec())) + " " + str(edge.get_time_traveled()) + "\n")
+
