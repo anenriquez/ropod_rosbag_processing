@@ -26,7 +26,7 @@ count = 0
 seen_topics = {}
 
 # TODO move this test
-config = "./config/config.yaml"
+config = "./config/config_angela.yaml"
 config_params = load_yaml(config)
 nodes_dict = config_params.get('nodes')
 nodes = TravelNode.get_travel_nodes(nodes_dict)
