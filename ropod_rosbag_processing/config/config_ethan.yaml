@@ -7,4 +7,4 @@ nodes:
   stairs_mensa: [-14, -75, 0]
   street_end: [-63, -145, 0]
   faraway_end: [-67, 18.5, 0]
-output: 'ethan/'
+output: 'ethan'
