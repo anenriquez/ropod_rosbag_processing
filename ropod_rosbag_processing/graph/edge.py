@@ -1,4 +1,7 @@
+from datetime import datetime
+
 NS_TO_SEC = 1000000000
+
 
 class TravelEdge:
     def __init__(self, start_node, start_time, end_node, end_time):

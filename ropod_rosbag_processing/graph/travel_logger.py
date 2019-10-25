@@ -1,8 +1,9 @@
-from ropod_rosbag_processing.graph.edge import TravelEdge
-from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.pose import Pose
 import os
+
+from ropod_rosbag_processing.graph.edge import TravelEdge
+
 NS_TO_MS = 1000000
+
 
 class TravelLogger:
     def __init__(self, nodes_of_interest, event_radius=.3, event_threshold=.1):
