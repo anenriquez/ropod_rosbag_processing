@@ -1,7 +1,7 @@
 import rosbag
 from ropod_rosbag_processing.utils.get_files import get_bagfiles
 
-TO_PROCESS_DIR = '../../input/'
+TO_PROCESS_DIR = '../../guido_bags/'
 
 
 def join_bagfiles(outbagfile, bagfiles):
