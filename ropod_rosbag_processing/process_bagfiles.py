@@ -1,13 +1,22 @@
 from ropod_rosbag_processing.utils.utils import load_yaml
 import os
 from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.utils.get_files import get_bagfiles
 from ropod_rosbag_processing.graph.travel_logger import TravelLogger
 import rosbag
 from ropod_rosbag_processing.pose import Pose
 
 
 TO_PROCESS_DIR = '../../input/'
+
+
+def get_joined_bagfiles(path):
+    bagfiles = list()
+    for root, directories, files in os.walk(path):
+        for file in files:
+            if file.endswith('joined.bag'):
+                bagfiles.append(os.path.join(file))
+    bagfiles.sort()
+    return bagfiles
 
 
 def get_config_files(path):
@@ -28,11 +37,9 @@ def parse_config_file(config_file):
 
 
 def update_travel_logger(bagfile, travel_loggers):
-    seen_topics = {}
 
     bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
     for topic, msg, cur_time in bag.read_messages():
-        seen_topics[topic] = topic
 
         if "/amcl_pose" in topic:
             ros_pose = msg.pose.pose.position
@@ -43,22 +50,33 @@ def update_travel_logger(bagfile, travel_loggers):
 
 def process():
     config_files = get_config_files('config/')
-    bagfiles = get_bagfiles(TO_PROCESS_DIR)
-    travel_loggers = list()
+    bagfiles = get_joined_bagfiles(TO_PROCESS_DIR)
+
     output_dirs = list()
+    nodes_of_interest = list()
+
     for config_file in config_files:
         nodes, output_dir = parse_config_file(config_file)
-        travel_logger = TravelLogger(nodes)
-        travel_loggers.append(travel_logger)
         output_dirs.append(output_dir)
+        nodes_of_interest.append(nodes)
 
     for bagfile in bagfiles:
+        print("Processing bagfile: ", bagfile)
+
+        travel_loggers = list()
+
+        for i, nodes in enumerate(nodes_of_interest):
+            travel_loggers.append(TravelLogger(nodes))
+
         update_travel_logger(bagfile, travel_loggers)
+
         for i, travel_logger in enumerate(travel_loggers):
             print(travel_logger.get_history())
             travel_logger.to_file(output_dirs[i], file_suffix=bagfile.replace('.bag', '.txt'))
 
-process()
+
+if __name__ == '__main__':
+    process()
 
     # TODO: Move files from TO_PROCESS_DIR to PROCESSED_DIR
 
