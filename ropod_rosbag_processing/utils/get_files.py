@@ -11,6 +11,10 @@ ROBOT_DIR = 'home/narko5/.ros/gbot/bag/'
 USB_DIR = 'guido_bags/'
 WORKSTATION_DIR = 'home/ropod/guido_bags/'
 
+# ROBOT_DIR = '/home/angela/Documents/MAS/robot'
+# USB_DIR = '/home/angela/Documents/MAS/usb'
+# WORKSTATION_DIR = '/home/angela/Documents/MAS/workstation'
+
 
 def get_bagfile_names(file):
     bagfile_names = list()
@@ -18,7 +22,7 @@ def get_bagfile_names(file):
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
             bagfile_names.append(row['bagfile_name'])
-        return bagfile_names
+    return bagfile_names
 
 
 def get_bagfiles(path):
@@ -27,11 +31,13 @@ def get_bagfiles(path):
         for file in files:
             if file.endswith('.bag'):
                 bagfiles.append(os.path.join(file))
+    bagfiles.sort()
     return bagfiles
 
 
 def add_bagfile_to_register(register, file_name):
     with open(register, mode='a') as csv_file:
+        print("Adding bagfile {} to bookkeeping file: ".format(file_name))
         csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow([file_name])
 
@@ -51,7 +57,7 @@ def copy(source, destination):
             shutil.copy(source + '/' + bagfile, destination)
 
             if destination == WORKSTATION_DIR:
-                add_bagfile_to_register(bagfile_bookkepper, bagfile.split('/')[-1])
+                add_bagfile_to_register(bagfile_bookkepper, bagfile)
 
             n_copied_files += 1
         print("Number of copied files: {}/{}".format(n_copied_files, len(bagfiles)))
