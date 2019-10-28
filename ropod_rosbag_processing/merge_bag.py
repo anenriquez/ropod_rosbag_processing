@@ -1,7 +1,9 @@
 import rosbag
 from ropod_rosbag_processing.utils.get_files import get_bagfiles
+import shutil
 
 TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
+PROCESSED_DIR = '/home/ropod/processed_bags/'
 
 
 def join_bagfiles(outbagfile, bagfiles):
@@ -38,11 +40,17 @@ def get_bagfiles_to_join(bagfiles):
             print("Adding {} to joined bagfile {}".format(bagfile, outbagfile))
             bagfiles_to_join[outbagfile].append(bagfile)
 
+        print("Moving {} to processed bagfiles".format(bagfile))
+        try:
+            shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
+        except shutil.Error as err:
+            print("The file already exists in the destination")
+
     return bagfiles_to_join
 
 
 if __name__ == "__main__":
-
+    print("Joining bagfiles")
     bagfiles = get_bagfiles(TO_PROCESS_DIR)
     bagfiles_to_join = get_bagfiles_to_join(bagfiles)
 

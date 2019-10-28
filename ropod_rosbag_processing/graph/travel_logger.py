@@ -30,7 +30,7 @@ class TravelLogger:
                     # if this isn't the first node add the edge
                     if self.last_node is not None:
                         self.edges.append(TravelEdge(self.last_node, self.last_time, node, cur_time))
-                        print(len(self.edges))
+                        #print(len(self.edges))
                     self.last_node = node
                     self.last_time = cur_time
                     self.at_node = True
