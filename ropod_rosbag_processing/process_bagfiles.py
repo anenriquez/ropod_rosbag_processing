@@ -4,10 +4,11 @@ from ropod_rosbag_processing.graph.node import TravelNode
 from ropod_rosbag_processing.graph.travel_logger import TravelLogger
 import rosbag
 from ropod_rosbag_processing.pose import Pose
+import shutil
 
 
-TO_PROCESS_DIR = '../../to_process_bags/'
-PROCESSED_DIR = '../../processed_bags/'
+TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
+PROCESSED_DIR = '/home/ropod/processed_bags/'
 
 
 def get_joined_bagfiles(path):
@@ -75,6 +76,11 @@ def process():
             print(travel_logger.get_history())
             travel_logger.to_file(output_dirs[i], file_suffix=bagfile.replace('.bag', '.txt'))
 
+        print("Moving {} to processed bagfiles".format(bagfile)
+        try:
+            shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
+        except shutil.Error as err:
+            print("The file already exists in the destination")
 
 if __name__ == '__main__':
     process()
