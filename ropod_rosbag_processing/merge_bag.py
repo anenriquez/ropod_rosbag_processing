@@ -12,7 +12,7 @@ def join_bagfiles(outbagfile, bagfiles):
     with rosbag.Bag(outbagfile, 'w') as output_file:
         for bagfile in bagfiles:
             print("Reading bag file: ", bagfile)
-            with rosbag.Bag(TO_PROCESS_DIR + bagfile, 'r') as input_file:
+            with rosbag.Bag(PROCESSED_DIR + bagfile, 'r') as input_file:
                 for topic, msg, t in input_file:
                     if "/amcl_pose" in topic \
                             or '/autonomous_navigation/local_costmap/costmap' in topic:
@@ -45,6 +45,7 @@ def get_bagfiles_to_join(bagfiles):
             shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
         except shutil.Error as err:
             print("The file already exists in the destination")
+
 
     return bagfiles_to_join
 
