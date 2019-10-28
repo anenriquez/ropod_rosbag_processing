@@ -7,9 +7,9 @@ import argparse
 bagfile_bookkepper = "bookkeeper.csv"
 
 # Directories to put bagfiles
-ROBOT_DIR = 'home/narko5/.ros/gbot/bag/'
-USB_DIR = 'guido_bags/'
-WORKSTATION_DIR = 'home/ropod/guido_bags/'
+ROBOT_DIR = '/home/narko5/.ros/gbot/bag/'
+USB_DIR = '/guido_bags/'
+WORKSTATION_DIR = '/home/ropod/to_process_bags/'
 
 # ROBOT_DIR = '/home/angela/Documents/MAS/robot'
 # USB_DIR = '/home/angela/Documents/MAS/usb'

@@ -6,7 +6,8 @@ import rosbag
 from ropod_rosbag_processing.pose import Pose
 
 
-TO_PROCESS_DIR = '../../guido_bags/'
+TO_PROCESS_DIR = '../../to_process_bags/'
+PROCESSED_DIR = '../../processed_bags/'
 
 
 def get_joined_bagfiles(path):
