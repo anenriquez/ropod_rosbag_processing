@@ -53,6 +53,7 @@ def update_travel_logger(bagfile, travel_loggers):
 def process():
     config_files = get_config_files('config/')
     bagfiles = get_joined_bagfiles(TO_PROCESS_DIR)
+    print(bagfiles)
 
     output_dirs = list()
     nodes_of_interest = list()
@@ -76,7 +77,7 @@ def process():
             print(travel_logger.get_history())
             travel_logger.to_file(output_dirs[i], file_suffix=bagfile.replace('.bag', '.txt'))
 
-        print("Moving {} to processed bagfiles".format(bagfile)
+        print("Moving {} to processed bagfiles".format(bagfile))
         try:
             shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
         except shutil.Error as err:
