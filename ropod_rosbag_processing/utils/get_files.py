@@ -18,19 +18,23 @@ WORKSTATION_DIR = 'home/ropod/guido_bags/'
 
 def get_bagfile_names(file):
     bagfile_names = list()
-    with open(file, 'r') as file:
-        csv_reader = csv.DictReader(file)
+    with open(a_file, 'r') as a_file:
+        csv_reader = csv.DictReader(a_file)
         for row in csv_reader:
             bagfile_names.append(row['bagfile_name'])
     return bagfile_names
 
 
 def get_bagfiles(path):
+    print("Getting bagfiles")
+    print("Path", path)
     bagfiles = list()
+
     for root, directories, files in os.walk(path):
-        for file in files:
-            if file.endswith('.bag'):
-                bagfiles.append(os.path.join(file))
+        for a_file in files:
+            print(a_file)
+            if a_file.endswith('.bag'):
+                bagfiles.append(os.path.join(a_file))
     bagfiles.sort()
     return bagfiles
 
