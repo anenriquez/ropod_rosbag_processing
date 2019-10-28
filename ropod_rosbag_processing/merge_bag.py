@@ -12,7 +12,8 @@ def join_bagfiles(outbagfile, bagfiles):
             print("Reading bag file: ", bagfile)
             with rosbag.Bag(TO_PROCESS_DIR + bagfile, 'r') as input_file:
                 for topic, msg, t in input_file:
-                    if "/amcl_pose" in topic:
+                    if "/amcl_pose" in topic \
+                            or '/autonomous_navigation/local_costmap/costmap' in topic:
                         output_file.write(topic, msg, t)
 
 
@@ -26,11 +27,11 @@ def get_bagfiles_to_join(bagfiles):
         bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
 
         for topic, msg, cur_time in bag.read_messages():
-            if abs(last_time - cur_time.to_sec()) > threshold:
-                print("Difference: ", last_time - cur_time.to_sec())
-                outbagfile = TO_PROCESS_DIR + bagfile.split('.')[0] + '_joined.bag'
+            if cur_time.to_sec() - last_time > threshold:
+                outbagfile = TO_PROCESS_DIR + bagfile.replace('.bag', '') + '_joined.bag'
                 print("Outbagfile: ", outbagfile)
                 bagfiles_to_join[outbagfile] = list()
+
             last_time = cur_time.to_sec()
 
         if outbagfile is not None:
