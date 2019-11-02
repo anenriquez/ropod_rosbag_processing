@@ -26,26 +26,29 @@ def get_bagfiles_to_join(bagfiles):
     outbagfile = None
 
     for bagfile in bagfiles:
-        bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
-
-        for topic, msg, cur_time in bag.read_messages():
-            if cur_time.to_sec() - last_time > threshold:
-                outbagfile = TO_PROCESS_DIR + bagfile.replace('.bag', '') + '_joined.bag'
-                print("Outbagfile: ", outbagfile)
-                bagfiles_to_join[outbagfile] = list()
-
-            last_time = cur_time.to_sec()
-
-        if outbagfile is not None:
-            print("Adding {} to joined bagfile {}".format(bagfile, outbagfile))
-            bagfiles_to_join[outbagfile].append(bagfile)
-
-        print("Moving {} to processed bagfiles".format(bagfile))
         try:
-            shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
-        except shutil.Error as err:
-            print("The file already exists in the destination")
+            bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
 
+            for topic, msg, cur_time in bag.read_messages():
+                if cur_time.to_sec() - last_time > threshold:
+                    outbagfile = TO_PROCESS_DIR + bagfile.replace('.bag', '') + '_joined.bag'
+                    print("Outbagfile: ", outbagfile)
+                    bagfiles_to_join[outbagfile] = list()
+
+                last_time = cur_time.to_sec()
+
+            if outbagfile is not None:
+                print("Adding {} to joined bagfile {}".format(bagfile, outbagfile))
+                bagfiles_to_join[outbagfile].append(bagfile)
+
+            print("Moving {} to processed bagfiles".format(bagfile))
+            try:
+                shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
+            except shutil.Error as err:
+                print("The file already exists in the destination")
+
+        except rosbag.bag.ROSBagFormatException:
+            print("Error opening file:", bagfile)
 
     return bagfiles_to_join
 
