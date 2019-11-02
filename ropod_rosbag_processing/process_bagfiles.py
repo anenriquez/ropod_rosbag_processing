@@ -40,7 +40,7 @@ def parse_config_file(config_file):
 
 def update_travel_logger(bagfile, travel_loggers):
 
-    bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
+    bag = rosbag.Bag(PROCESSED_DIR+ bagfile)
     for topic, msg, cur_time in bag.read_messages():
 
         if "/amcl_pose" in topic:
@@ -52,7 +52,7 @@ def update_travel_logger(bagfile, travel_loggers):
 
 def process():
     config_files = get_config_files('config/')
-    bagfiles = get_joined_bagfiles(TO_PROCESS_DIR)
+    bagfiles = get_joined_bagfiles(PROCESSED_DIR)
     print(bagfiles)
 
     output_dirs = list()
