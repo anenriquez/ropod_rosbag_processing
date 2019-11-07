@@ -3,12 +3,18 @@ import os
 from ropod_rosbag_processing.graph.node import TravelNode
 from ropod_rosbag_processing.graph.travel_logger import TravelLogger
 import rosbag
-from ropod_rosbag_processing.pose import Pose
+from ropod_rosbag_processing.graph.pose import Pose
 import shutil
 
 
-TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
-PROCESSED_DIR = '/home/ropod/processed_bags/'
+
+
+
+# TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
+TO_PROCESS_DIR = '/home/angela/ropod/input/'
+
+# PROCESSED_DIR = '/home/ropod/processed_bags/'
+PROCESSED_DIR = '/home/angela/ropod/input/'
 
 
 def get_joined_bagfiles(path):
@@ -41,13 +47,24 @@ def parse_config_file(config_file):
 def update_travel_logger(bagfile, travel_loggers):
 
     bag = rosbag.Bag(PROCESSED_DIR+ bagfile)
+    prev_time = None
+
     for topic, msg, cur_time in bag.read_messages():
 
         if "/amcl_pose" in topic:
             ros_pose = msg.pose.pose.position
             cur_pose = Pose(ros_pose.x, ros_pose.y, ros_pose.z)
+
             for travel_logger in travel_loggers:
-                travel_logger.event_update(cur_pose, cur_time)
+                travel_logger.update_pose(cur_pose, cur_time)
+
+        if "/autonomous_navigation/local_costmap/costmap" in topic:
+            if prev_time is None or cur_time.secs - prev_time.secs > 5:
+                prev_time = cur_time
+                costmap = msg.data
+
+                for travel_logger in travel_loggers:
+                    travel_logger.update_costmap(cur_time, costmap)
 
 
 def process():
@@ -83,10 +100,10 @@ def process():
         except shutil.Error as err:
             print("The file already exists in the destination")
 
+
 if __name__ == '__main__':
     process()
 
     # TODO: Move files from TO_PROCESS_DIR to PROCESSED_DIR
-
 
 
