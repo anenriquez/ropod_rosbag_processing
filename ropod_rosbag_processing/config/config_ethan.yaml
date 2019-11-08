@@ -10,3 +10,4 @@ nodes_of_interest:
 base_dir: 'ethan'
 event_radius: 0.5
 event_threshold: 0.1
+min_distance_static_samples: 0.5

@@ -11,11 +11,12 @@ NS_TO_MS = 1000000
 
 
 class TravelLogger:
-    def __init__(self, base_dir, nodes_of_interest, event_radius=.5, event_threshold=.1):
+    def __init__(self, base_dir, nodes_of_interest, event_radius=.5, event_threshold=.1, min_distance_static_samples=.5):
         self.base_dir = base_dir
         self.nodes_of_interest = nodes_of_interest
         self.event_radius = event_radius
         self.event_threshold = event_threshold
+        self.min_distance_static_samples = min_distance_static_samples
 
         self.edges = []
         self.travel_obstacles = {}
@@ -143,7 +144,7 @@ class TravelLogger:
             check_path_existence(out_dir)
 
             filtered_obstacle_samples = \
-                ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples)
+                ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples, self.min_distance_static_samples)
 
             ObstacleInfo.to_file(out_dir + "/HEADER.csv", filtered_obstacle_samples)
 
