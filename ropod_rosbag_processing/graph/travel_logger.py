@@ -1,4 +1,5 @@
 import os
+from ropod_rosbag_processing.utils.utils import check_path_existence
 
 from ropod_rosbag_processing.graph.edge import TravelEdge
 from ropod_rosbag_processing.graph.travel_obstacles import TravelObstacle
@@ -85,33 +86,30 @@ class TravelLogger:
 
         return history
 
-    def to_file(self, dir_name="travel_log_output", file_suffix=".txt"):
-        travel_time_dir = dir_name + '/travel_time'
-        obstacles_dir = dir_name + '/obstacles'
+    def to_file(self, file_suffix=".txt"):
+        travel_time_dir = self.base_dir + '/travel_time'
+        obstacles_dir = self.base_dir + '/obstacles'
 
-        if not os.path.exists(travel_time_dir):
-            os.makedirs(travel_time_dir)
-
-        if not os.path.exists(obstacles_dir):
-            os.makedirs(obstacles_dir)
+        check_path_existence(travel_time_dir)
+        check_path_existence(obstacles_dir)
 
         self.travel_time_to_file(travel_time_dir, file_suffix)
         self.obstacle_to_file(obstacles_dir, file_suffix)
 
     def travel_time_to_file(self, dir_name, file_suffix=".txt"):
         edge_histories = self.get_history_dict()
+
         for edge_history in edge_histories.values():
             first_edge = edge_history[0]
             edge_name = first_edge.get_edge_name()
             out_dir = dir_name + "/" + edge_name
 
-            if not os.path.exists(out_dir):
-                os.makedirs(out_dir)
+            check_path_existence(out_dir)
 
-                with open(out_dir + "/HEADER.info", 'w') as header_file:  # Use file to refer to the file object
-                    header_file.write("HEADER INFO: " + first_edge.get_edge_name() + " " + first_edge.get_dist_traveled_string() + "\n")
-                    header_file.write("NODE NAMES: " + first_edge.start_node.name + " " + first_edge.end_node.name + "\n")
-                    header_file.write("POSITIONS" + str(first_edge.start_node.pose) + " " + str(first_edge.end_node.pose) + "\n")
+            with open(out_dir + "/HEADER.info", 'w') as header_file:  # Use file to refer to the file object
+                header_file.write("HEADER INFO: " + first_edge.get_edge_name() + " " + first_edge.get_dist_traveled_string() + "\n")
+                header_file.write("NODE NAMES: " + first_edge.start_node.name + " " + first_edge.end_node.name + "\n")
+                header_file.write("POSITIONS" + str(first_edge.start_node.pose) + " " + str(first_edge.end_node.pose) + "\n")
 
             out_dest = out_dir + "/" + edge_name + file_suffix
 
@@ -119,12 +117,27 @@ class TravelLogger:
                 for edge in edge_history:
                     out_file.write(str(int(edge.start_time.to_sec())) + " " + str(edge.get_time_traveled()) + "\n")
 
-    def obstacle_ground_truth_to_file(self, dir_name):
+    def obstacle_to_file(self, dir_name, file_suffix=".txt"):
         for edge_name, travel_obstacle_list in self.travel_obstacles.items():
-            out_dir = dir_name + "/obstacles/" + edge_name
+            out_dir = dir_name + "/" + edge_name
+            check_path_existence(out_dir)
 
-            if not os.path.exists(out_dir):
-                os.makedirs(out_dir)
+            out_dest = out_dir + "/" + edge_name + file_suffix
+
+            with open(out_dest, 'w') as out_file:  # Use file to refer to the file object
+                for travel_obstacle in travel_obstacle_list:
+                    if travel_obstacle.obstacle_samples:
+                        for obstacle_info in travel_obstacle.obstacle_samples:
+                            timestamp = str(int(obstacle_info.timestamp.to_sec()))
+                            quantity = str(obstacle_info.quantity)
+
+                            out_file.write(timestamp + " " + quantity + "\n")
+
+    def obstacle_ground_truth_to_file(self):
+        for edge_name, travel_obstacle_list in self.travel_obstacles.items():
+            out_dir = self.base_dir + "/obstacles/" + edge_name
+
+            check_path_existence(out_dir)
 
             filtered_obstacle_samples = \
                 ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples)
@@ -136,8 +149,7 @@ class TravelLogger:
             out_dir = self.base_dir + "/obstacles/" + edge_name + "/dynamic/"
             closest_obstacles = []
 
-            if not os.path.exists(out_dir):
-                os.makedirs(out_dir)
+            check_path_existence(out_dir)
 
             out_dest = out_dir + edge_name + ".txt"
 
@@ -147,24 +159,6 @@ class TravelLogger:
                     closest_obstacles.append(closest_obstacle)
 
             ObstacleInfo.to_file(out_dest, closest_obstacles)
-
-    def obstacle_to_file(self, dir_name, file_suffix=".txt"):
-        for edge_name, travel_obstacle_list in self.travel_obstacles.items():
-            out_dir = dir_name + "/" + edge_name
-
-            if not os.path.exists(out_dir):
-                os.makedirs(out_dir)
-
-            out_dest = out_dir + "/" + edge_name + file_suffix
-            with open(out_dest, 'w') as out_file:  # Use file to refer to the file object
-                for travel_obstacle in travel_obstacle_list:
-                    if travel_obstacle.obstacle_samples:
-                        for obstacle_info in travel_obstacle.obstacle_samples:
-
-                            timestamp = str(int(obstacle_info.timestamp.to_sec()))
-                            quantity = str(obstacle_info.quantity)
-
-                            out_file.write(timestamp + " " + quantity + "\n")
 
 
 

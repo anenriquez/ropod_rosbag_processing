@@ -72,7 +72,7 @@ def update_travel_logger(bagfile, travel_loggers):
 def process():
     config_files = get_config_files('config/')
     bagfiles = get_joined_bagfiles(PROCESSED_DIR)
-    print(bagfiles)
+    print("N of bagfiles to process:", len(bagfiles))
 
     output_dirs = list()
     nodes_of_interest = list()
@@ -94,8 +94,8 @@ def process():
 
         for i, travel_logger in enumerate(travel_loggers):
             print(travel_logger.get_history())
-            travel_logger.to_file(output_dirs[i], file_suffix=bagfile.replace('.bag', '.txt'))
-            travel_logger.obstacle_ground_truth_to_file(output_dirs[i])
+            travel_logger.to_file(file_suffix=bagfile.replace('.bag', '.txt'))
+            travel_logger.obstacle_ground_truth_to_file()
             travel_logger.dynamic_obstacles_to_file()
 
         print("Moving {} to processed bagfiles".format(bagfile))
