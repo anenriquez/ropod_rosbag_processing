@@ -1,11 +1,7 @@
-from datetime import datetime
 import rosbag
-import subprocess
-import os
-import math
 from ropod_rosbag_processing.utils.utils import load_yaml
 from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.graph.travel_logger import TravelLogger
+from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
 from ropod_rosbag_processing.pose import Pose
 
 bag_dir = "../../input/"

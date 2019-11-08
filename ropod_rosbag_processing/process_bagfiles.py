@@ -1,7 +1,7 @@
 from ropod_rosbag_processing.utils.utils import load_yaml
 import os
 from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.graph.travel_logger import TravelLogger
+from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
 import rosbag
 from ropod_rosbag_processing.graph.pose import Pose
 import shutil

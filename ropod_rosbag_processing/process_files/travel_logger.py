@@ -1,11 +1,10 @@
-import os
 from ropod_rosbag_processing.utils.utils import check_path_existence
 
 from ropod_rosbag_processing.graph.edge import TravelEdge
-from ropod_rosbag_processing.graph.travel_obstacles import TravelObstacle
+from ropod_rosbag_processing.process_files.travel_obstacles import TravelObstacle
 from ropod_rosbag_processing.utils.costmap_processing import from_costmap_to_coordinates
 from ropod_rosbag_processing.utils.costmap_processing import get_n_obstacles
-from ropod_rosbag_processing.graph.obstacle_info import ObstacleInfo
+from ropod_rosbag_processing.process_files.obstacle_info import ObstacleInfo
 
 NS_TO_MS = 1000000
 

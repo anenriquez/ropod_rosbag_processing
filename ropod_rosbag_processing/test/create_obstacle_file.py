@@ -1,4 +1,4 @@
-from ropod_rosbag_processing.graph.obstacle_info import ObstacleInfo
+from ropod_rosbag_processing.process_files.obstacle_info import ObstacleInfo
 import rospy
 from ropod_rosbag_processing.graph.pose import Pose
 
