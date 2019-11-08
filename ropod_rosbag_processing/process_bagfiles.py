@@ -38,10 +38,10 @@ def get_config_files(path):
 
 def parse_config_file(config_file):
     config_params = load_yaml(config_file)
-    nodes_dict = config_params.get('nodes')
-    nodes = TravelNode.get_travel_nodes(nodes_dict)
-    output_dir = config_params.get('output')
-    return nodes, output_dir
+    nodes_dict = config_params.get('nodes_of_interest')
+    nodes_obj = TravelNode.get_travel_nodes(nodes_dict)
+    config_params.update(nodes_of_interest=nodes_obj)
+    return config_params
 
 
 def update_travel_logger(bagfile, travel_loggers):
@@ -74,21 +74,19 @@ def process():
     bagfiles = get_joined_bagfiles(PROCESSED_DIR)
     print("N of bagfiles to process:", len(bagfiles))
 
-    output_dirs = list()
-    nodes_of_interest = list()
+    configs = list()
 
     for config_file in config_files:
-        nodes, output_dir = parse_config_file(config_file)
-        output_dirs.append(output_dir)
-        nodes_of_interest.append(nodes)
+        config = parse_config_file(config_file)
+        configs.append(config)
 
     for bagfile in bagfiles:
         print("Processing bagfile: ", bagfile)
 
         travel_loggers = list()
 
-        for i, nodes in enumerate(nodes_of_interest):
-            travel_loggers.append(TravelLogger(output_dirs[i], nodes))
+        for config in configs:
+            travel_loggers.append(TravelLogger(**config))
 
         update_travel_logger(bagfile, travel_loggers)
 

@@ -1,4 +1,4 @@
-nodes:
+nodes_of_interest:
   c022: [-0.71, -2.33, 0]
   c018: [-5.42, -8.83, 0]
   c019: [-8.49, -13.75, 0]
@@ -30,4 +30,6 @@ nodes:
   A045: [ -58.36, -141.96, 0]
   street_end: [-63, -145, 0]
   faraway_end: [-67, 18.5, 0]
-output: 'angela'
+base_dir: 'angela'
+event_radius: 0.5
+event_threshold: 0.1
