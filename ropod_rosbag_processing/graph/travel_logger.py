@@ -4,12 +4,14 @@ from ropod_rosbag_processing.graph.edge import TravelEdge
 from ropod_rosbag_processing.graph.travel_obstacles import TravelObstacle
 from ropod_rosbag_processing.utils.costmap_processing import from_costmap_to_coordinates
 from ropod_rosbag_processing.utils.costmap_processing import get_n_obstacles
+from ropod_rosbag_processing.graph.obstacle_info import ObstacleInfo
 
 NS_TO_MS = 1000000
 
 
 class TravelLogger:
-    def __init__(self, nodes_of_interest, event_radius=.5, event_threshold=.1):
+    def __init__(self, base_dir, nodes_of_interest, event_radius=.5, event_threshold=.1):
+        self.base_dir = base_dir
         self.edges = []
         self.travel_obstacles = {}
         self.cur_travel_obstacle = TravelObstacle()
@@ -19,6 +21,7 @@ class TravelLogger:
         self.nodes_of_interest = nodes_of_interest
         self.event_radius = event_radius
         self.event_threshold = event_threshold
+        self.static_obstacle_samples = {}
 
     def update_pose(self, cur_pose, cur_time):
         for node in self.nodes_of_interest:
@@ -36,7 +39,10 @@ class TravelLogger:
 
                     if self.last_node is not None:
                         self.edges.append(TravelEdge(self.last_node, self.last_time, node, cur_time))
-                        self.cur_travel_obstacle.set_edge_name(self.edges[-1].get_edge_name())
+
+                        edge_name = self.edges[-1].get_edge_name()
+                        static_obstacle_samples = self.get_static_obstacle_samples(edge_name)
+                        self.cur_travel_obstacle.set_edge_info(edge_name, static_obstacle_samples)
 
                         if self.cur_travel_obstacle.edge_name not in self.travel_obstacles:
                             self.travel_obstacles[self.cur_travel_obstacle.edge_name] = []
@@ -50,11 +56,18 @@ class TravelLogger:
                     self.last_time = cur_time
                     self.at_node = True
 
-    def update_costmap(self, cur_time, costmap):
+    def get_static_obstacle_samples(self, edge_name):
+        if edge_name not in self.static_obstacle_samples:
+            file_path = str(self.base_dir) + "/obstacles/" + edge_name + "/HEADER.csv"
+            self.static_obstacle_samples[edge_name] = ObstacleInfo.from_file(file_path)
+
+        return self.static_obstacle_samples[edge_name]
+
+    def update_costmap(self, cur_time, costmap, cur_pose):
         coordinates = from_costmap_to_coordinates(costmap)
         if coordinates.any():
             n_obstacles = get_n_obstacles(coordinates)
-            self.cur_travel_obstacle.update_obstacle_info(cur_time, n_obstacles)
+            self.cur_travel_obstacle.update_obstacle_info(cur_time, n_obstacles, cur_pose)
 
     def get_history_dict(self):
         histories = {}
@@ -106,8 +119,37 @@ class TravelLogger:
                 for edge in edge_history:
                     out_file.write(str(int(edge.start_time.to_sec())) + " " + str(edge.get_time_traveled()) + "\n")
 
+    def obstacle_ground_truth_to_file(self, dir_name):
+        for edge_name, travel_obstacle_list in self.travel_obstacles.items():
+            out_dir = dir_name + "/obstacles/" + edge_name
+
+            if not os.path.exists(out_dir):
+                os.makedirs(out_dir)
+
+            filtered_obstacle_samples = \
+                ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples)
+
+            ObstacleInfo.to_file(out_dir + "/HEADER.csv", filtered_obstacle_samples)
+
+    def dynamic_obstacles_to_file(self):
+        for edge_name, travel_obstacle_list in self.travel_obstacles.items():
+            out_dir = self.base_dir + "/obstacles/" + edge_name + "/dynamic/"
+            closest_obstacles = []
+
+            if not os.path.exists(out_dir):
+                os.makedirs(out_dir)
+
+            out_dest = out_dir + edge_name + ".txt"
+
+            for travel_obstacle in travel_obstacle_list:
+                for obstacle_sample in travel_obstacle.obstacle_samples:
+                    closest_obstacle = obstacle_sample.get_estimated_dynamic_obstacles(travel_obstacle.static_obstacle_samples)
+                    closest_obstacles.append(closest_obstacle)
+
+            ObstacleInfo.to_file(out_dest, closest_obstacles)
+
     def obstacle_to_file(self, dir_name, file_suffix=".txt"):
-        for edge_name, obstacles in self.travel_obstacles.items():
+        for edge_name, travel_obstacle_list in self.travel_obstacles.items():
             out_dir = dir_name + "/" + edge_name
 
             if not os.path.exists(out_dir):
@@ -115,10 +157,14 @@ class TravelLogger:
 
             out_dest = out_dir + "/" + edge_name + file_suffix
             with open(out_dest, 'w') as out_file:  # Use file to refer to the file object
-                for obstacle in obstacles:
-                    if obstacle.obstacle_info:
-                        for info in obstacle.obstacle_info:
-                            out_file.write(str(int(info[0].to_sec())) + " " + str(info[1]) + "\n")
+                for travel_obstacle in travel_obstacle_list:
+                    if travel_obstacle.obstacle_samples:
+                        for obstacle_info in travel_obstacle.obstacle_samples:
+
+                            timestamp = str(int(obstacle_info.timestamp.to_sec()))
+                            quantity = str(obstacle_info.quantity)
+
+                            out_file.write(timestamp + " " + quantity + "\n")
 
 
 

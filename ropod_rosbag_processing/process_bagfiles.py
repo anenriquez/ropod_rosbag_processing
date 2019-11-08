@@ -59,12 +59,14 @@ def update_travel_logger(bagfile, travel_loggers):
                 travel_logger.update_pose(cur_pose, cur_time)
 
         if "/autonomous_navigation/local_costmap/costmap" in topic:
-            if prev_time is None or cur_time.secs - prev_time.secs > 5:
+            if prev_time is None or cur_time.secs - prev_time.secs >= 1:
                 prev_time = cur_time
                 costmap = msg.data
 
+                cur_pose = Pose(msg.info.origin.position.x, msg.info.origin.position.y, msg.info.origin.position.z)
+
                 for travel_logger in travel_loggers:
-                    travel_logger.update_costmap(cur_time, costmap)
+                    travel_logger.update_costmap(cur_time, costmap, cur_pose)
 
 
 def process():
@@ -86,13 +88,15 @@ def process():
         travel_loggers = list()
 
         for i, nodes in enumerate(nodes_of_interest):
-            travel_loggers.append(TravelLogger(nodes))
+            travel_loggers.append(TravelLogger(output_dirs[i], nodes))
 
         update_travel_logger(bagfile, travel_loggers)
 
         for i, travel_logger in enumerate(travel_loggers):
             print(travel_logger.get_history())
             travel_logger.to_file(output_dirs[i], file_suffix=bagfile.replace('.bag', '.txt'))
+            travel_logger.obstacle_ground_truth_to_file(output_dirs[i])
+            travel_logger.dynamic_obstacles_to_file()
 
         print("Moving {} to processed bagfiles".format(bagfile))
         try:
