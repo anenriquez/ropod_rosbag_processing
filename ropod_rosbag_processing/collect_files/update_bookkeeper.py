@@ -1,5 +1,5 @@
-from ropod_rosbag_processing.utils.get_files import get_bagfiles
-from ropod_rosbag_processing.utils.get_files import add_bagfile_to_register
+from ropod_rosbag_processing.collect_files.get_files import get_bagfiles
+from ropod_rosbag_processing.collect_files.get_files import add_bagfile_to_register
 
 
 # File with name of bagfiles that have been copied to the workstation
