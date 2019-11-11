@@ -62,7 +62,7 @@ class TravelLogger:
 
     def get_static_obstacle_samples(self, edge_name):
         if edge_name not in self.static_obstacle_samples:
-            file_path = str(self.base_dir) + "/obstacles/" + edge_name + "/HEADER.csv"
+            file_path = str(self.base_dir) + "/obstacles/" + edge_name + "/static.csv"
             self.static_obstacle_samples[edge_name] = ObstacleInfo.from_file(file_path)
 
         return self.static_obstacle_samples[edge_name]
@@ -122,7 +122,7 @@ class TravelLogger:
 
     def obstacle_to_file(self, dir_name, file_suffix=".txt"):
         for edge_name, travel_obstacle_list in self.travel_obstacles.items():
-            out_dir = dir_name + "/" + edge_name
+            out_dir = dir_name + "/" + edge_name + "/total/"
             check_path_existence(out_dir)
 
             out_dest = out_dir + "/" + edge_name + file_suffix
@@ -145,7 +145,7 @@ class TravelLogger:
             filtered_obstacle_samples = \
                 ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples, self.min_distance_static_samples)
 
-            ObstacleInfo.to_file(out_dir + "/HEADER.csv", filtered_obstacle_samples)
+            ObstacleInfo.to_file(out_dir + "/static.csv", filtered_obstacle_samples)
 
     def dynamic_obstacles_to_file(self):
         for edge_name, travel_obstacle_list in self.travel_obstacles.items():
