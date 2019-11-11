@@ -1,4 +1,7 @@
+from datetime import datetime
+
 NS_TO_SEC = 1000000000
+
 
 class TravelEdge:
     def __init__(self, start_node, start_time, end_node, end_time):
@@ -49,5 +52,9 @@ class TravelEdge:
         return self.get_dist_traveled() / self.get_time_traveled()
 
     def get_average_speed_string(self):
-        avg_speed = self.get_dist_traveled() / self.get_time_traveled()
+        try:
+            avg_speed = self.get_dist_traveled() / self.get_time_traveled()
+        except ZeroDivisionError:
+            print("Cannot divide by zero")
+            return str("{0:.2f}".format(0.0)) + " meters/second"
         return str("{0:.2f}".format(avg_speed)) + " meters/second"

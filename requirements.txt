@@ -2,3 +2,5 @@ rosbag
 PyYAML>=4.2b
 gnupg
 rospkg
+sklearn
+numpy

@@ -1,4 +1,4 @@
-from ropod_rosbag_processing.pose import Pose
+from ropod_rosbag_processing.graph.pose import Pose
 
 
 class TravelNode:
