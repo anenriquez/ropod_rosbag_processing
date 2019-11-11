@@ -7,9 +7,9 @@ import argparse
 bagfile_bookkepper = "bookkeeper.csv"
 
 # Directories to put bagfiles
-ROBOT_DIR = '/home/narko5/.ros/gbot/bag/'
-USB_DIR = '/guido_bags/'
-WORKSTATION_DIR = '/home/ropod/to_process_bags/'
+ROBOT_DIR = '/home/narko5/.ros/gbot/bag'
+USB_DIR = '/mnt/guido_bags'
+WORKSTATION_DIR = '/home/ropod/to_process_bags'
 
 # ROBOT_DIR = '/home/angela/Documents/MAS/robot'
 # USB_DIR = '/home/angela/Documents/MAS/usb'
@@ -30,11 +30,11 @@ def get_bagfiles(path):
     print("Path", path)
     bagfiles = list()
 
-    for root, directories, files in os.walk(path):
-        for a_file in files:
-            print(a_file)
-            if a_file.endswith('.bag'):
-                bagfiles.append(os.path.join(a_file))
+    for item in os.listdir(path):
+        if os.path.isfile(os.path.join(path, item)):
+            if item.endswith('.bag'):
+                bagfiles.append(os.path.join(item))
+
     bagfiles.sort()
     return bagfiles
 
