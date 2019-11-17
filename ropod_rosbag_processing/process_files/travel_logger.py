@@ -10,12 +10,20 @@ NS_TO_MS = 1000000
 
 
 class TravelLogger:
-    def __init__(self, base_dir, nodes_of_interest, event_radius=.5, event_threshold=.1, min_distance_static_samples=.5):
+    def __init__(self,
+                 logger_name,
+                 base_dir,
+                 nodes_of_interest,
+                 edges_of_interest,
+                 **kwargs):
+
+        self.name = logger_name
         self.base_dir = base_dir
         self.nodes_of_interest = nodes_of_interest
-        self.event_radius = event_radius
-        self.event_threshold = event_threshold
-        self.min_distance_static_samples = min_distance_static_samples
+        self.edges_of_interest = edges_of_interest
+        self.event_radius = kwargs.get('event_radius', 0.5)
+        self.event_threshold = kwargs.get('event_threshold', 0.1)
+        self.min_distance_static_samples = kwargs.get('min_distance_static_samples', 0.5)
 
         self.edges = []
         self.travel_obstacles = {}
@@ -40,8 +48,12 @@ class TravelLogger:
                     # if this isn't the first node add the edge
 
                     if self.last_node is not None:
-                        self.edges.append(TravelEdge(self.last_node, self.last_time, node, cur_time))
-                        self.update_travel_obstacles()
+                        edge_name = self.last_node.name + "_to_" + node.name
+                        print("Travel logger {} traversed edge: {}".format(self.name, edge_name))
+                        if edge_name in self.edges_of_interest:
+                            print("Travel logger {}: {} is in edges of interest".format(self.name, edge_name))
+                            self.edges.append(TravelEdge(self.last_node, self.last_time, node, cur_time))
+                            self.update_travel_obstacles()
 
                     self.last_node = node
                     self.last_time = cur_time
@@ -56,8 +68,6 @@ class TravelLogger:
             self.travel_obstacles[self.cur_travel_obstacle.edge_name] = []
         self.travel_obstacles[self.cur_travel_obstacle.edge_name].append(self.cur_travel_obstacle)
 
-        print("Edges: ", [edge.get_edge_name() for edge in self.edges])
-        print("Current travel obstacle \n", self.cur_travel_obstacle)
         self.cur_travel_obstacle = TravelObstacle()
 
     def get_static_obstacle_samples(self, edge_name):
