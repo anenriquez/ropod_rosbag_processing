@@ -43,7 +43,6 @@ class TravelNode:
         for name, pose in nodes_dict.items():
             travel_node = TravelNode.from_dict({'name': name,
                                                 'pose': pose})
-            print(travel_node)
             nodes.append(travel_node)
 
         return nodes
