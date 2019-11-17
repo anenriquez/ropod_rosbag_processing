@@ -1,0 +1,16 @@
+logger_name: street_common_lane
+edges:
+  - [Pose 194, Pose 73]
+  - [Pose 73, Pose 193]
+  - [Pose 78, Pose 195]
+  - [Pose 195, Pose 99]
+  - [Pose 99, Pose 84]
+  - [INT-A1, Pose 90]
+  - [Pose 90, Pose 91]
+  - [Pose 91, Pose 97]
+  - [Pose 96, Pose 93]
+
+base_dir: 'angela'
+event_radius: 1
+event_threshold: 0.1
+min_distance_static_samples: 0.5
