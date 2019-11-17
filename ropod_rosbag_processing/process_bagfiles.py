@@ -8,6 +8,7 @@ from ropod_rosbag_processing.graph.pose import Pose
 
 # BAGFILES_DIR = '/home/ropod/processed_bags/'
 BAGFILES_DIR = '/home/angela/ropod/input/'
+NODES_FILE = 'config/nodes.yaml'
 
 
 def get_joined_bagfiles(path):
@@ -37,8 +38,15 @@ def parse_config_file(config_file):
 
 
 def get_nodes(config_params):
-    nodes_dict = config_params.pop('nodes')
-    nodes_obj = TravelNode.get_travel_nodes(nodes_dict)
+    all_nodes = load_yaml(NODES_FILE)
+    nodes_of_interest = dict()
+    edges = config_params.get('edges')
+
+    for edge in edges:
+        nodes_of_interest[edge[0]] = all_nodes.get(edge[0])
+        nodes_of_interest[edge[1]] = all_nodes.get((edge[1]))
+
+    nodes_obj = TravelNode.get_travel_nodes(nodes_of_interest)
     config_params.update(nodes_of_interest=nodes_obj)
     return config_params
 
@@ -79,7 +87,10 @@ def update_travel_logger(bagfile, travel_loggers):
 
 
 def process():
-    config_files = get_config_files('config/')
+    config_files_angela = get_config_files('config/angela/')
+    config_files_ethan = get_config_files('config/ethan/')
+    config_files = config_files_angela + config_files_ethan
+    # config_files = ['config/angela/square/config_common_lane.yaml']
     print(config_files)
     bagfiles = get_joined_bagfiles(BAGFILES_DIR)
     print("N of bagfiles to process:", len(bagfiles))
