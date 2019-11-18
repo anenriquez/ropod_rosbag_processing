@@ -1,13 +1,14 @@
-from ropod_rosbag_processing.utils.utils import load_yaml
 import os
-from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
+import shutil
+
 import rosbag
+from ropod_rosbag_processing.graph.node import TravelNode
 from ropod_rosbag_processing.graph.pose import Pose
+from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
+from ropod_rosbag_processing.utils.utils import load_yaml
 
-
-# BAGFILES_DIR = '/home/ropod/processed_bags/'
-BAGFILES_DIR = '/home/angela/ropod/input/'
+MERGED_BAGFILES_DIR = '/home/ropod/merged_bags/'
+PROCESSED_DIR = '/home/ropod/processed_bags/'
 NODES_FILE = 'config/nodes.yaml'
 
 
@@ -63,7 +64,7 @@ def get_edges(config_params):
 
 def update_travel_logger(bagfile, travel_loggers):
 
-    bag = rosbag.Bag(BAGFILES_DIR + bagfile)
+    bag = rosbag.Bag(MERGED_BAGFILES_DIR + bagfile)
     prev_time = None
 
     for topic, msg, cur_time in bag.read_messages():
@@ -90,9 +91,8 @@ def process():
     config_files_angela = get_config_files('config/angela/')
     config_files_ethan = get_config_files('config/ethan/')
     config_files = config_files_angela + config_files_ethan
-    # config_files = ['config/angela/square/config_common_lane.yaml']
     print(config_files)
-    bagfiles = get_joined_bagfiles(BAGFILES_DIR)
+    bagfiles = get_joined_bagfiles(MERGED_BAGFILES_DIR)
     print("N of bagfiles to process:", len(bagfiles))
 
     configs = list()
@@ -116,6 +116,12 @@ def process():
             travel_logger.to_file(file_suffix=bagfile.replace('.bag', '.txt'))
             travel_logger.obstacle_ground_truth_to_file()
             travel_logger.dynamic_obstacles_to_file()
+
+        print("Moving {} to processed bagfiles".format(bagfile))
+        try:
+            shutil.move(MERGED_BAGFILES_DIR + bagfile, PROCESSED_DIR)
+        except shutil.Error as err:
+            print("The file already exists in the destination")
 
 
 if __name__ == '__main__':
