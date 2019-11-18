@@ -1,0 +1,10 @@
+logger_name: square_common_lane
+edges:
+  - [INT-C011, INT-C012]
+  - [INT-C013, Pose 209]
+  - [Pose 209, Pose 200]
+  - [Pose 200, Pose 204]
+base_dir: 'angela'
+event_radius: 1
+event_threshold: 0.1
+min_distance_static_samples: 0.5

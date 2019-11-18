@@ -1,20 +1,15 @@
-from ropod_rosbag_processing.utils.utils import load_yaml
 import os
-from ropod_rosbag_processing.graph.node import TravelNode
-from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
-import rosbag
-from ropod_rosbag_processing.graph.pose import Pose
 import shutil
 
+import rosbag
+from ropod_rosbag_processing.graph.node import TravelNode
+from ropod_rosbag_processing.graph.pose import Pose
+from ropod_rosbag_processing.process_files.travel_logger import TravelLogger
+from ropod_rosbag_processing.utils.utils import load_yaml
 
-
-
-
-# TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
-TO_PROCESS_DIR = '/home/angela/ropod/input/'
-
-# PROCESSED_DIR = '/home/ropod/processed_bags/'
-PROCESSED_DIR = '/home/angela/ropod/input/'
+MERGED_BAGFILES_DIR = '/home/ropod/merged_bags/'
+PROCESSED_DIR = '/home/ropod/processed_bags/'
+NODES_FILE = 'config/nodes.yaml'
 
 
 def get_joined_bagfiles(path):
@@ -38,15 +33,38 @@ def get_config_files(path):
 
 def parse_config_file(config_file):
     config_params = load_yaml(config_file)
-    nodes_dict = config_params.get('nodes_of_interest')
-    nodes_obj = TravelNode.get_travel_nodes(nodes_dict)
+    config_params = get_nodes(config_params)
+    config_params = get_edges(config_params)
+    return config_params
+
+
+def get_nodes(config_params):
+    all_nodes = load_yaml(NODES_FILE)
+    nodes_of_interest = dict()
+    edges = config_params.get('edges')
+
+    for edge in edges:
+        nodes_of_interest[edge[0]] = all_nodes.get(edge[0])
+        nodes_of_interest[edge[1]] = all_nodes.get((edge[1]))
+
+    nodes_obj = TravelNode.get_travel_nodes(nodes_of_interest)
     config_params.update(nodes_of_interest=nodes_obj)
+    return config_params
+
+
+def get_edges(config_params):
+    edges_list = config_params.pop('edges')
+    edge_names = list()
+    for edge in edges_list:
+        edge_names.append(edge[0] + '_to_' + edge[1])
+        edge_names.append(edge[1] + '_to_' + edge[0])
+    config_params.update(edges_of_interest=edge_names)
     return config_params
 
 
 def update_travel_logger(bagfile, travel_loggers):
 
-    bag = rosbag.Bag(PROCESSED_DIR+ bagfile)
+    bag = rosbag.Bag(MERGED_BAGFILES_DIR + bagfile)
     prev_time = None
 
     for topic, msg, cur_time in bag.read_messages():
@@ -70,8 +88,11 @@ def update_travel_logger(bagfile, travel_loggers):
 
 
 def process():
-    config_files = get_config_files('config/')
-    bagfiles = get_joined_bagfiles(PROCESSED_DIR)
+    config_files_angela = get_config_files('config/angela/')
+    config_files_ethan = get_config_files('config/ethan/')
+    config_files = config_files_angela + config_files_ethan
+    print(config_files)
+    bagfiles = get_joined_bagfiles(MERGED_BAGFILES_DIR)
     print("N of bagfiles to process:", len(bagfiles))
 
     configs = list()
@@ -98,7 +119,7 @@ def process():
 
         print("Moving {} to processed bagfiles".format(bagfile))
         try:
-            shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
+            shutil.move(MERGED_BAGFILES_DIR + bagfile, PROCESSED_DIR)
         except shutil.Error as err:
             print("The file already exists in the destination")
 
@@ -106,6 +127,5 @@ def process():
 if __name__ == '__main__':
     process()
 
-    # TODO: Move files from TO_PROCESS_DIR to PROCESSED_DIR
 
 

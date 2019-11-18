@@ -4,3 +4,4 @@ gnupg
 rospkg
 sklearn
 numpy
+matplotlib==3.0.3

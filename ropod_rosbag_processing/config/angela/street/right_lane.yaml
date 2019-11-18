@@ -1,0 +1,26 @@
+logger_name: street_right_lane
+edges:
+  - [Pose 50, Pose 51]
+  - [Pose 51, Pose 53]
+  - [Pose 53, Pose 54]
+  - [Pose 54, Pose 194]
+  - [Pose 194, Pose 193]
+  - [Pose 193, Pose 75]
+  - [Pose 193, Pose 79]
+  - [Pose 79, Pose 76]
+  - [Pose 76, Pose 80]
+  - [Pose 80, Pose 78]
+  - [Pose 99, Pose 82]
+  - [Pose 82, Pose 84]
+  - [Pose 84, Pose 85]
+  - [Pose 85, Pose 202]
+  - [Pose 202, Pose 201]
+  - [Pose 91, Pose 100]
+  - [Pose 100, Pose 97]
+  - [Pose 97, Pose 93]
+  - [Pose 93, Pose 95]
+  - [Pose 95, Pose 94]
+base_dir: 'angela'
+event_radius: 1
+event_threshold: 0.1
+min_distance_static_samples: 0.5

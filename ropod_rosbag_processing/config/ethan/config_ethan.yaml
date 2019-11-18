@@ -1,0 +1,22 @@
+logger_name: one_lane
+nodes:
+  c022: [-0.71, -2.33, 0]
+  square_inter_1: [-31.5, -49, 0]
+  square_inter_2: [-60, -30, 0]
+  square_inter_3: [-37.5, 5, 0]
+  atm: [-13, -70, 0]
+  stairs_mensa: [-14, -75, 0]
+  street_end: [-63, -145, 0]
+  faraway_end: [-67, 18.5, 0]
+edges:
+  - [c022, square_inter_1]
+  - [square_inter_1, square_inter_2]
+  - [square_inter_2, square_inter_3]
+  - [square_inter_3, c022]
+  - [atm, stairs_mensa]
+  - [stairs_mensa, street_end]
+  - [street_end, faraway_end]
+base_dir: 'ethan'
+event_radius: 0.5
+event_threshold: 0.1
+min_distance_static_samples: 0.5

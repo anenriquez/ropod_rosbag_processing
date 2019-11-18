@@ -3,7 +3,7 @@ from ropod_rosbag_processing.collect_files.get_files import get_bagfiles
 import shutil
 
 TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
-PROCESSED_DIR = '/home/ropod/processed_bags/'
+MERGED_BAGFILES_DIR = '/home/ropod/merged_bags/'
 
 
 def join_bagfiles(outbagfile, bagfiles):
@@ -11,8 +11,8 @@ def join_bagfiles(outbagfile, bagfiles):
 
     with rosbag.Bag(outbagfile, 'w') as output_file:
         for bagfile in bagfiles:
-            print("Reading bag file: ", bagfile)
-            with rosbag.Bag(PROCESSED_DIR + bagfile, 'r') as input_file:
+            print("Reading bagfile: ", bagfile)
+            with rosbag.Bag(MERGED_BAGFILES_DIR, 'r') as input_file:
                 for topic, msg, t in input_file:
                     if "/amcl_pose" in topic \
                             or '/autonomous_navigation/local_costmap/costmap' in topic:
@@ -41,9 +41,9 @@ def get_bagfiles_to_join(bagfiles):
                 print("Adding {} to joined bagfile {}".format(bagfile, outbagfile))
                 bagfiles_to_join[outbagfile].append(bagfile)
 
-            print("Moving {} to processed bagfiles".format(bagfile))
+            print("Moving {} to merged bagfiles dir".format(bagfile))
             try:
-                shutil.move(TO_PROCESS_DIR + bagfile, PROCESSED_DIR)
+                shutil.move(TO_PROCESS_DIR + bagfile, MERGED_BAGFILES_DIR)
             except shutil.Error as err:
                 print("The file already exists in the destination")
 
