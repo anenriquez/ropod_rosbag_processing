@@ -16,6 +16,20 @@ class ObstacleInfo:
         to_print += "Pose: " + str(self.pose)
         return to_print
 
+    def __eq__(self, other):
+        if self.timestamp == other.timestamp and \
+            self.quantity == other.quantity and \
+                self.pose == other.pose:
+            return True
+        return False
+
+    def __ne__(self, other):
+        if self.timestamp != other.timestamp and \
+                self.quantity != other.quantity and \
+                self.pose != other.pose:
+            return True
+        return False
+
     def to_csv(self):
         to_csv = ""
         to_csv += str(int(self.timestamp.to_sec())) + ","
