@@ -13,6 +13,7 @@ edges:
   - [square_inter_1, square_inter_2]
   - [square_inter_2, square_inter_3]
   - [square_inter_3, c022]
+  - [square_inter_1, atm]
   - [atm, stairs_mensa]
   - [stairs_mensa, street_end]
   - [street_end, faraway_end]
