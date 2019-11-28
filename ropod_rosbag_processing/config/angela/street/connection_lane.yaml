@@ -1,4 +1,4 @@
-logger_name: street_common_lane
+logger_name: street_connection_lane
 edges:
   - [Pose 51, Pose 52]
   - [Pose 54, Pose 55]
@@ -8,6 +8,6 @@ edges:
   - [Pose 96, Pose 100]
   - [Pose 93, Pose 95]
 base_dir: 'angela'
-event_radius: 1
+event_radius: 0.5
 event_threshold: 0.1
 min_distance_static_samples: 0.5
