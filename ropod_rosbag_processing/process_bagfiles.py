@@ -114,7 +114,8 @@ def process():
         for i, travel_logger in enumerate(travel_loggers):
             print(travel_logger.get_history())
             travel_logger.to_file(file_suffix=bagfile.replace('.bag', '.txt'))
-            travel_logger.obstacle_ground_truth_to_file()
+            # This should only be done for bagfiles without obstacles!
+            # travel_logger.obstacle_ground_truth_to_file()
             travel_logger.dynamic_obstacles_to_file()
 
         print("Moving {} to processed bagfiles".format(bagfile))
