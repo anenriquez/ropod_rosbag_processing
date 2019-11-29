@@ -1,14 +1,14 @@
 logger_name: street_common_lane
 edges:
-  - [Pose 50, Pose 53]
-  - [Pose 53, Pose 251]
-  - [Pose 73, Pose 193]
-  - [Pose 72, stairs_mensa]
-  - [Pose 74, Pose 251]
-  - [Pose 193, Pose 79]
-  - [Pose 195, Pose 99]
-  - [INT-A1, Pose 90]
-  - [Pose 90, Pose 96]
+  - [Pose_50, Pose_53]
+  - [Pose_53, Pose_251]
+  - [Pose_73, Pose_193]
+  - [Pose_72, stairs_mensa]
+  - [Pose_74, Pose_251]
+  - [Pose_193, Pose_79]
+  - [Pose_195, Pose_99]
+  - [INT-A1, Pose_90]
+  - [Pose_90, Pose_96]
 base_dir: 'angela'
 event_radius: 1
 event_threshold: 0.1

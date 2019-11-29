@@ -1,12 +1,12 @@
 logger_name: street_connection_lane
 edges:
-  - [Pose 51, Pose 52]
-  - [Pose 54, Pose 55]
-  - [Pose 85, Pose 87]
-  - [Pose 201, INT-A1]
-  - [Pose 97, Pose 96]
-  - [Pose 96, Pose 100]
-  - [Pose 93, Pose 95]
+  - [Pose_51, Pose_52]
+  - [Pose_54, Pose_55]
+  - [Pose_85, Pose_87]
+  - [Pose_201, INT-A1]
+  - [Pose_97, Pose_96]
+  - [Pose_96, Pose_100]
+  - [Pose_93, Pose_95]
 base_dir: 'angela'
 event_radius: 0.5
 event_threshold: 0.1
