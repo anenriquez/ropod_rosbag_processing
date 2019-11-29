@@ -1,6 +1,7 @@
 from ropod_rosbag_processing.graph.pose import Pose
 import numpy as np
 import rospy
+import os
 
 
 class ObstacleInfo:
@@ -15,6 +16,20 @@ class ObstacleInfo:
         to_print += "Obstacles: " + str(self.quantity) + "\t"
         to_print += "Pose: " + str(self.pose)
         return to_print
+
+    def __eq__(self, other):
+        if self.timestamp == other.timestamp and \
+            self.quantity == other.quantity and \
+                self.pose == other.pose:
+            return True
+        return False
+
+    def __ne__(self, other):
+        if self.timestamp != other.timestamp and \
+                self.quantity != other.quantity and \
+                self.pose != other.pose:
+            return True
+        return False
 
     def to_csv(self):
         to_csv = ""
@@ -79,7 +94,15 @@ class ObstacleInfo:
     def to_file(file_path, obstacles):
         file_suffix = file_path.split('.')[-1]
         lines = []
-        with open(file_path, 'w') as outfile:
+        line_break = False
+
+        if os.path.isfile(file_path):
+            with open(file_path, 'r') as outfile:
+                current_lines = outfile.readlines()
+                if current_lines:
+                    line_break = True
+
+        with open(file_path, 'a') as outfile:
             for obstacle in obstacles:
                 if file_suffix == 'csv':
                     lines.append(obstacle.to_csv())
@@ -87,7 +110,10 @@ class ObstacleInfo:
                 elif file_suffix == 'txt':
                     lines.append(obstacle.to_sd())
 
-            outfile.write("\n".join(lines))
+            to_write = "\n".join(lines)
+            if line_break:
+                to_write = "\n" + to_write
+            outfile.write(to_write)
 
     @classmethod
     def from_file(cls, file):

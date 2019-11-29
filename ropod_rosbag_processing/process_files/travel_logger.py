@@ -5,6 +5,7 @@ from ropod_rosbag_processing.process_files.travel_obstacles import TravelObstacl
 from ropod_rosbag_processing.utils.costmap_processing import from_costmap_to_coordinates
 from ropod_rosbag_processing.utils.costmap_processing import get_n_obstacles
 from ropod_rosbag_processing.process_files.obstacle_info import ObstacleInfo
+import os
 
 NS_TO_MS = 1000000
 
@@ -49,7 +50,7 @@ class TravelLogger:
 
                     if self.last_node is not None:
                         edge_name = self.last_node.name + "_to_" + node.name
-                        print("Travel logger {} traversed edge: {}".format(self.name, edge_name))
+                        # print("Travel logger {} traversed edge: {}".format(self.name, edge_name))
                         if edge_name in self.edges_of_interest:
                             print("Travel logger {}: {} is in edges of interest".format(self.name, edge_name))
                             self.edges.append(TravelEdge(self.last_node, self.last_time, node, cur_time))
@@ -73,7 +74,10 @@ class TravelLogger:
     def get_static_obstacle_samples(self, edge_name):
         if edge_name not in self.static_obstacle_samples:
             file_path = str(self.base_dir) + "/obstacles/" + edge_name + "/static.csv"
-            self.static_obstacle_samples[edge_name] = ObstacleInfo.from_file(file_path)
+            if os.path.exists(file_path):
+                self.static_obstacle_samples[edge_name] = ObstacleInfo.from_file(file_path)
+            else:
+                return list()
 
         return self.static_obstacle_samples[edge_name]
 
@@ -169,9 +173,13 @@ class TravelLogger:
             for travel_obstacle in travel_obstacle_list:
                 for obstacle_sample in travel_obstacle.obstacle_samples:
                     closest_obstacle = obstacle_sample.get_estimated_dynamic_obstacles(travel_obstacle.static_obstacle_samples)
-                    closest_obstacles.append(closest_obstacle)
+                    if closest_obstacle is not None and closest_obstacle != ObstacleInfo(None, None, None):
+                        closest_obstacles.append(closest_obstacle)
 
-            ObstacleInfo.to_file(out_dest, closest_obstacles)
+            if closest_obstacles:
+                ObstacleInfo.to_file(out_dest, closest_obstacles)
+            else:
+                print("No closest obstacles found for edge", edge_name)
 
 
 
