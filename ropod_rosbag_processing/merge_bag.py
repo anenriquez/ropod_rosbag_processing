@@ -12,30 +12,34 @@ def join_bagfiles(outbagfile, bagfiles):
     with rosbag.Bag(outbagfile, 'w') as output_file:
         for bagfile in bagfiles:
             print("Reading bagfile: ", bagfile)
-            with rosbag.Bag(MERGED_BAGFILES_DIR, 'r') as input_file:
+            with rosbag.Bag(MERGED_BAGFILES_DIR + bagfile, 'r') as input_file:
                 for topic, msg, t in input_file:
                     if "/amcl_pose" in topic \
-                            or '/autonomous_navigation/local_costmap/costmap' in topic:
+                            or '/autonomous_navigation/local_costmap/costmap' in topic or '/tf' in topic:
                         output_file.write(topic, msg, t)
 
 
 def get_bagfiles_to_join(bagfiles):
     threshold = 3600  # seconds
     last_time = 0
+    last_day = []
     bagfiles_to_join = dict()
     outbagfile = None
 
     for bagfile in bagfiles:
         try:
             bag = rosbag.Bag(TO_PROCESS_DIR + bagfile)
-
+            current_day = bagfile.split('-')[:3]
+            print("Current day: ", current_day)
+            print("last day: ", last_day)
             for topic, msg, cur_time in bag.read_messages():
-                if cur_time.to_sec() - last_time > threshold:
-                    outbagfile = TO_PROCESS_DIR + bagfile.replace('.bag', '') + '_joined.bag'
+                if cur_time.to_sec() - last_time > threshold or current_day != last_day:
+                    outbagfile = MERGED_BAGFILES_DIR + bagfile.replace('.bag', '') + '_joined.bag'
                     print("Outbagfile: ", outbagfile)
                     bagfiles_to_join[outbagfile] = list()
 
                 last_time = cur_time.to_sec()
+                last_day = current_day
 
             if outbagfile is not None:
                 print("Adding {} to joined bagfile {}".format(bagfile, outbagfile))
