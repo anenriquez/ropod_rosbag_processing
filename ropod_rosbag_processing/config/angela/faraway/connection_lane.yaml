@@ -62,7 +62,7 @@ edges:
   - [INT-B3, Pose_190]
   - [INT-B3, Pose_191]
   - [Pose_191, Pose_192]
-  - [Pose_193, INT-B3]
+  - [Pose_192, INT-B3]
 base_dir: 'angela'
 event_radius: 0.3
 event_threshold: 0.1
