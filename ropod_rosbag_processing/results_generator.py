@@ -19,6 +19,12 @@ class EdgeObservation:
 
         return sum(self.obstacle_counts)/len(self.obstacle_counts)
 
+    def get_max_obstacles(self):
+        if len(self.obstacle_counts) == 0:
+            return -1
+
+        return max(self.obstacle_counts)
+
 
     def add_obstacle_count(self, count):
         self.obstacle_counts.append(count)
@@ -62,7 +68,11 @@ class EdgeObservations:
                 out_file.write(str(observation.duration))
                 out_file.write(' ')
                 out_file.write(str(observation.get_average_obstacles()))
+                out_file.write(' ')
+                out_file.write(str(observation.get_max_obstacles()))
                 out_file.write('\n')
+
+
 
     @staticmethod
     def from_file(file_path, name):
@@ -103,7 +113,8 @@ if __name__ == '__main__':
         for edge_name in edge_observations_dict.keys():
             file_path = path + edge_name + '/dynamic/' + edge_name + '.txt'
             print(file_path)
-            edge_observations_dict[edge_name].add_observations_from_file(file_path)
+            if os.path.isfile(file_path):
+                edge_observations_dict[edge_name].add_observations_from_file(file_path)
 
         # make sure our output path exists
         path = './' + base_dir + '/results/'
