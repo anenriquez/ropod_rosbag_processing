@@ -11,12 +11,16 @@ def join_bagfiles(outbagfile, bagfiles):
 
     with rosbag.Bag(outbagfile, 'w') as output_file:
         for bagfile in bagfiles:
-            print("Reading bagfile: ", bagfile)
-            with rosbag.Bag(MERGED_BAGFILES_DIR + bagfile, 'r') as input_file:
-                for topic, msg, t in input_file:
-                    if "/amcl_pose" in topic \
-                            or '/autonomous_navigation/local_costmap/costmap' in topic or '/tf' in topic:
-                        output_file.write(topic, msg, t)
+            try:
+                print("Reading bagfile: ", bagfile)
+                with rosbag.Bag(MERGED_BAGFILES_DIR + bagfile, 'r') as input_file:
+                    for topic, msg, t in input_file:
+                        if "/amcl_pose" in topic \
+                                or '/autonomous_navigation/local_costmap/costmap' in topic or '/tf' in topic:
+                            output_file.write(topic, msg, t)
+
+            except rosbag.bag.ROSBagFormatException:
+                print("Error opening file:", bagfile)
 
 
 def get_bagfiles_to_join(bagfiles):
