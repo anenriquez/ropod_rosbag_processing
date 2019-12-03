@@ -1,9 +1,10 @@
 logger_name: square_common_lane
 edges:
-  - [INT-C011, INT-C012]
-  - [INT-C013, Pose_209]
-  - [Pose_209, Pose_200]
-  - [Pose_200, Pose_204]
+  - [INT-C004, LC-036]
+  - [LC-036, LC-037]
+  - [LC-037, LC-038]
+  - [LC-038, LC-039]
+  - [INT-C005, INT-C009]
 base_dir: 'angela'
 event_radius: 1
 event_threshold: 0.1
