@@ -1,13 +1,12 @@
 logger_name: street_connection_lane
 edges:
-  - [Pose_51, Pose_52]
-  - [Pose_54, Pose_55]
-  - [Pose_85, Pose_87]
-  - [Pose_201, INT-A1]
-  - [Pose_97, Pose_96]
-  - [Pose_96, Pose_100]
-  - [Pose_93, Pose_95]
+  - [LC-054, C002]
+  - [LA-002, A-stairs-main]
+  - [INT-A001, LA-011]
+  - [LA-017, LA-018]
+  - [A045, LA-019]
+  - [LA-016, LA-017]
 base_dir: 'angela'
-event_radius: 0.5
+event_radius: 1
 event_threshold: 0.1
 min_distance_static_samples: 0.5

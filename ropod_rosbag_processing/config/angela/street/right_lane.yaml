@@ -1,0 +1,25 @@
+logger_name: street_right_lane
+edges:
+  - [INT-C002, C002]
+  - [C002, INT-C007]
+  - [LA-001, A-stairs-main]
+  - [A-stairs-main, A-main-entrance]
+  - [A-main-entrance, LA-003]
+  - [LA-003, LA-005]
+  - [mensa-entrance, LA-007]
+  - [LA-007, LA-008]
+  - [LA-008, LA-010]
+  - [LA-010, LA-022]
+  - [LA-022, LA-012]
+  - [LA-012, LA-013]
+  - [LA-013, LA-014]
+  - [LA-014, LA-011]
+  - [LA-011, LA-015]
+  - [LA-015, LA-016]
+  - [LA-016, LA-018]
+  - [LA-018, LA-019]
+  - [street-end, LA-021]
+base_dir: 'angela'
+event_radius: 1
+event_threshold: 0.1
+min_distance_static_samples: 0.5

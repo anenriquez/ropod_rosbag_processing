@@ -1,0 +1,14 @@
+logger_name: street_common_lane
+edges:
+  - [INT-C002, INT-C007]
+  - [INT-C007, LA-001]
+  - [stairs-mensa, LA-006]
+  - [LA-001, A-main-entrance]
+  - [LA-005, stairs-mensa]
+  - [A-elevator-1, stairs-mensa]
+  - [LA-005, mensa-entrance]
+  - [LA-005, stairs-mensa]
+base_dir: 'angela'
+event_radius: 1
+event_threshold: 0.1
+min_distance_static_samples: 0.5
