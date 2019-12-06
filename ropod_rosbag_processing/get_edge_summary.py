@@ -10,22 +10,22 @@ class EdgeSummary:
     def get_stats(durations):
         if len(durations) > 1:
             mean = statistics.mean(durations)
-            standard_deviation = statistics.stdev(durations)
+            variance = statistics.variance(durations)
         else:
             mean = durations[0]
-            standard_deviation = 0
+            variance = 0
 
-        return mean, standard_deviation
+        return mean, variance
 
     def to_file(self, file_path):
         with open(file_path, 'w') as out_file:
             for max_n_obstacles, durations in self.edge_info.items():
-                mean, standard_deviation = self.get_stats(durations)
+                mean, variance = self.get_stats(durations)
                 out_file.write(str(len(durations)))  # Number of measurements
                 out_file.write(' ')
                 out_file.write(str(mean))
                 out_file.write(' ')
-                out_file.write(str(standard_deviation))
+                out_file.write(str(variance))
                 out_file.write(' ')
                 out_file.write(str(max_n_obstacles))
                 out_file.write('\n')
