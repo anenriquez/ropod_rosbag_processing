@@ -32,7 +32,7 @@ def get_bagfiles(path):
 
     for item in os.listdir(path):
         if os.path.isfile(os.path.join(path, item)):
-            if item.endswith('.bag'):
+            if item.endswith('.bag') or item.endswith('.bag.active'):
                 bagfiles.append(os.path.join(item))
 
     bagfiles.sort()
