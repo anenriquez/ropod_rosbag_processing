@@ -1,9 +1,19 @@
 import rosbag
 from ropod_rosbag_processing.collect_files.get_files import get_bagfiles
 import shutil
+import subprocess
 
 TO_PROCESS_DIR = '/home/ropod/to_process_bags/'
 MERGED_BAGFILES_DIR = '/home/ropod/merged_bags/'
+
+
+def repair_bagfiles(bagfiles):
+    for bagfile in bagfiles:
+        if bagfile.endswith('.bag.active'):
+            print("Reindexing bagfile: ", bagfile)
+            subprocess.call(["rosbag", "reindex", TO_PROCESS_DIR + bagfile])
+            new_name = bagfile.replace('bag.active', 'bag')
+            subprocess.call(["mv", TO_PROCESS_DIR + bagfile, TO_PROCESS_DIR + new_name])
 
 
 def join_bagfiles(outbagfile, bagfiles):
