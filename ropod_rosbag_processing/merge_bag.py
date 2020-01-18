@@ -31,6 +31,9 @@ def join_bagfiles(outbagfile, bagfiles):
 
             except rosbag.bag.ROSBagFormatException:
                 print("Error opening file:", bagfile)
+            except rosbag.ROSBagUnindexedException:
+                print("Unindexed bag:", bagfile)
+
 
 
 def get_bagfiles_to_join(bagfiles):
@@ -67,12 +70,16 @@ def get_bagfiles_to_join(bagfiles):
 
         except rosbag.bag.ROSBagFormatException:
             print("Error opening file:", bagfile)
+        except rosbag.ROSBagUnindexedException:
+            print("Unindexed bag:", bagfile)
 
     return bagfiles_to_join
 
 
 if __name__ == "__main__":
     print("Joining bagfiles")
+    bagfiles = get_bagfiles(TO_PROCESS_DIR)
+    repair_bagfiles(bagfiles)
     bagfiles = get_bagfiles(TO_PROCESS_DIR)
     bagfiles_to_join = get_bagfiles_to_join(bagfiles)
 
