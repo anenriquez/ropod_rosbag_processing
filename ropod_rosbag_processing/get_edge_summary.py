@@ -14,13 +14,15 @@ def get_stats(durations):
     return mean, standard_deviation
 
 
-def to_file(edge_summary, file_path):
+def to_file(edge_summary, file_path, keep_outliers=False):
     with open(file_path, 'w') as out_file:
         for max_n_obstacles, durations in edge_summary.items():
-            filtered_durations = remove_outliers(durations)
-            mean, standard_deviation = get_stats(filtered_durations)
+            if not keep_outliers:
+                durations = remove_outliers(durations)
 
-            out_file.write(str(len(filtered_durations)))  # Number of measurements
+            mean, standard_deviation = get_stats(durations)
+
+            out_file.write(str(len(durations)))  # Number of measurements
             out_file.write(' ')
             out_file.write(str(mean))
             out_file.write(' ')
@@ -83,11 +85,12 @@ def remove_outliers(durations):
     return filtered_data
 
 
-dir_names = ['angela']
+# dir_name: keep_outliers
+dir_names = {'angela': False}
 
 if __name__ == '__main__':
 
-    for base_dir in dir_names:
+    for base_dir, keep_outliers in dir_names.items():
         path = base_dir + '/results/'
         # find sub directories (only current level)
         for edge_name in os.listdir(path):
@@ -96,4 +99,5 @@ if __name__ == '__main__':
                 file_path = path + edge_name
                 summary_file_path = file_path.replace('.out', '.summary')
                 edge_summary = from_file(file_path)
-                to_file(edge_summary, summary_file_path)
+
+                to_file(edge_summary, summary_file_path, keep_outliers)
