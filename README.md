@@ -99,16 +99,18 @@ Possible scenarios:
 
 - The robot travels between the event radius of two lanes: Information for both lanes is stored. 
 
-![two_lanes_1](https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_1.png)
+<img src="https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_1.png" width="1000">
 
 - The robot travels only within the event radius of a lane: Information for that lane is stored.
 
-![two_lanes_2](https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_2.png)
+<img src="https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_2.png" width="1000">
 
 - The robot travels within the event radius of the starting node of one lane and the ending node of the other lane: No
 information is stored for any of the lanes.
+<p align="center">
+  <img src="https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_3.png" width="300">
+</p>
 
-![two_lanes_3](https://github.com/anenriquez/ropod_rosbag_processing/blob/master/ropod_rosbag_processing/images/two_lanes_3.png)
 
 ### Results directory structure
 

@@ -67,38 +67,48 @@ def get_edges_of_interest(logger_config):
 
 def update_travel_logger(bagfile, travel_loggers):
 
-    bag = rosbag.Bag(MERGED_BAGFILES_DIR + bagfile)
-    prev_time = None
+    try:
 
-    for topic, msg, cur_time in bag.read_messages():
+        bag = rosbag.Bag(MERGED_BAGFILES_DIR + bagfile)
+        prev_time = None
 
-        if "/amcl_pose" in topic:
-            ros_pose = msg.pose.pose.position
-            cur_pose = Pose(ros_pose.x, ros_pose.y, ros_pose.z)
+        for topic, msg, cur_time in bag.read_messages():
 
-            for travel_logger in travel_loggers:
-                travel_logger.update_pose(cur_pose, cur_time)
-
-        if "/autonomous_navigation/local_costmap/costmap" in topic:
-            if prev_time is None or cur_time.secs - prev_time.secs >= 1:
-                prev_time = cur_time
-                costmap = msg.data
-
-                cur_pose = Pose(msg.info.origin.position.x, msg.info.origin.position.y, msg.info.origin.position.z)
+            if "/amcl_pose" in topic:
+                ros_pose = msg.pose.pose.position
+                cur_pose = Pose(ros_pose.x, ros_pose.y, ros_pose.z)
 
                 for travel_logger in travel_loggers:
-                    travel_logger.update_costmap(cur_time, costmap, cur_pose)
+                    travel_logger.update_pose(cur_pose, cur_time)
 
+            if "/autonomous_navigation/local_costmap/costmap" in topic:
+                if prev_time is None or cur_time.secs - prev_time.secs >= 1:
+                    prev_time = cur_time
+                    costmap = msg.data
+
+                    cur_pose = Pose(msg.info.origin.position.x, msg.info.origin.position.y, msg.info.origin.position.z)
+
+                    for travel_logger in travel_loggers:
+                        travel_logger.update_costmap(cur_time, costmap, cur_pose)
+
+    except rosbag.ROSBagUnindexedException:
+        print("Unindexed bag: ", bagfile)
+        raise rosbag.ROSBagUnindexedException
 
 def process():
     bagfiles = get_joined_bagfiles(MERGED_BAGFILES_DIR)
 
     for bagfile in bagfiles:
         print("Processing bagfile: ", bagfile)
+        move = True
 
         travel_loggers = get_travel_loggers('config/maps/')
 
-        update_travel_logger(bagfile, travel_loggers)
+        try:
+            update_travel_logger(bagfile, travel_loggers)
+        except rosbag.ROSBagUnindexedException:
+            print("Unindexed bag: ", bagfile)
+            move = False
 
         for i, travel_logger in enumerate(travel_loggers):
             print(travel_logger.get_history())
@@ -107,11 +117,12 @@ def process():
             # travel_logger.obstacle_ground_truth_to_file()
             travel_logger.dynamic_obstacles_to_file()
 
-        print("Moving {} to processed bagfiles".format(bagfile))
-        try:
-            shutil.move(MERGED_BAGFILES_DIR + bagfile, PROCESSED_DIR)
-        except shutil.Error as err:
-            print("The file already exists in the destination")
+        if move:
+            print("Moving {} to processed bagfiles".format(bagfile))
+            try:
+                shutil.move(MERGED_BAGFILES_DIR + bagfile, PROCESSED_DIR)
+            except shutil.Error as err:
+                print("The file already exists in the destination")
 
 
 if __name__ == '__main__':
