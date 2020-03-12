@@ -1,0 +1,1318 @@
+directed: false
+graph: {}
+links:
+  - oneway: 'yes'
+    source: 68
+    target: 70
+  - oneway: 'yes'
+    source: 68
+    target: 89
+  - oneway: 'yes'
+    source: 67
+    target: 89
+  - oneway: 'yes'
+    source: 67
+    target: 69
+  - oneway: 'yes'
+    source: 89
+    target: 65
+  - oneway: 'yes'
+    source: 89
+    target: 66
+  - oneway: 'no'
+    source: 58
+    target: 88
+  - oneway: 'yes'
+    source: 88
+    target: 61
+  - oneway: 'yes'
+    source: 88
+    target: 60
+  - oneway: 'no'
+    source: 59
+    target: 87
+  - oneway: 'yes'
+    source: 87
+    target: 60
+  - oneway: 'yes'
+    source: 87
+    target: 61
+  - oneway: 'no'
+    source: 44
+    target: 84
+  - oneway: 'yes'
+    source: 84
+    target: 46
+  - oneway: 'yes'
+    source: 84
+    target: 45
+  - oneway: 'yes'
+    source: 77
+    target: 91
+  - oneway: 'yes'
+    source: 77
+    target: 75
+  - oneway: 'yes'
+    source: 76
+    target: 75
+  - oneway: 'yes'
+    source: 76
+    target: 91
+  - oneway: 'no'
+    source: 91
+    target: 117
+  - oneway: 'yes'
+    source: 74
+    target: 75
+  - oneway: 'yes'
+    source: 74
+    target: 80
+  - oneway: 'yes'
+    source: 73
+    target: 80
+  - oneway: 'yes'
+    source: 73
+    target: 75
+  - oneway: 'no'
+    source: 80
+    target: 93
+  - oneway: 'yes'
+    source: 72
+    target: 75
+  - oneway: 'yes'
+    source: 72
+    target: 90
+  - oneway: 'yes'
+    source: 71
+    target: 90
+  - oneway: 'yes'
+    source: 71
+    target: 75
+  - oneway: 'yes'
+    source: 90
+    target: 69
+  - oneway: 'yes'
+    source: 90
+    target: 70
+  - oneway: 'yes'
+    source: 66
+    target: 64
+  - oneway: 'yes'
+    source: 65
+    target: 64
+  - oneway: 'yes'
+    source: 61
+    target: 64
+  - oneway: 'no'
+    source: 61
+    target: 60
+  - oneway: 'yes'
+    source: 60
+    target: 64
+  - oneway: 'no'
+    source: 63
+    target: 62
+  - oneway: 'yes'
+    source: 63
+    target: 64
+  - oneway: 'yes'
+    source: 62
+    target: 64
+  - oneway: 'yes'
+    source: 56
+    target: 64
+  - oneway: 'yes'
+    source: 56
+    target: 86
+  - oneway: 'no'
+    source: 56
+    target: 57
+  - oneway: 'yes'
+    source: 57
+    target: 86
+  - oneway: 'yes'
+    source: 57
+    target: 64
+  - oneway: 'yes'
+    source: 86
+    target: 54
+  - oneway: 'yes'
+    source: 86
+    target: 55
+  - oneway: 'yes'
+    source: 55
+    target: 53
+  - oneway: 'yes'
+    source: 54
+    target: 52
+  - oneway: 'yes'
+    source: 53
+    target: 85
+  - oneway: 'yes'
+    source: 52
+    target: 85
+  - oneway: 'yes'
+    source: 51
+    target: 85
+  - oneway: 'yes'
+    source: 51
+    target: 49
+  - oneway: 'yes'
+    source: 50
+    target: 49
+  - oneway: 'yes'
+    source: 50
+    target: 85
+  - oneway: 'yes'
+    source: 42
+    target: 49
+  - oneway: 'yes'
+    source: 43
+    target: 49
+  - oneway: 'yes'
+    source: 47
+    target: 49
+  - oneway: 'yes'
+    source: 47
+    target: 46
+  - oneway: 'yes'
+    source: 48
+    target: 45
+  - oneway: 'yes'
+    source: 48
+    target: 49
+  - oneway: 'no'
+    source: 46
+    target: 45
+  - oneway: 'yes'
+    source: 41
+    target: 83
+  - oneway: 'yes'
+    source: 41
+    target: 49
+  - oneway: 'yes'
+    source: 40
+    target: 49
+  - oneway: 'yes'
+    source: 40
+    target: 83
+  - oneway: 'yes'
+    source: 38
+    target: 37
+  - oneway: 'yes'
+    source: 38
+    target: 83
+  - oneway: 'yes'
+    source: 39
+    target: 83
+  - oneway: 'yes'
+    source: 39
+    target: 36
+  - oneway: 'yes'
+    source: 37
+    target: 34
+  - oneway: 'yes'
+    source: 36
+    target: 35
+  - oneway: 'yes'
+    source: 34
+    target: 82
+  - oneway: 'yes'
+    source: 35
+    target: 82
+  - oneway: 'yes'
+    source: 33
+    target: 29
+  - oneway: 'yes'
+    source: 33
+    target: 82
+  - oneway: 'yes'
+    source: 32
+    target: 82
+  - oneway: 'yes'
+    source: 32
+    target: 29
+  - oneway: 'yes'
+    source: 30
+    target: 29
+  - oneway: 'yes'
+    source: 31
+    target: 29
+  - oneway: 'yes'
+    source: 28
+    target: 81
+  - oneway: 'yes'
+    source: 28
+    target: 29
+  - oneway: 'yes'
+    source: 27
+    target: 29
+  - oneway: 'yes'
+    source: 27
+    target: 81
+  - oneway: 'no'
+    source: 81
+    target: 26
+  - oneway: 'yes'
+    source: 261
+    target: 259
+  - oneway: 'yes'
+    source: 261
+    target: 262
+  - oneway: 'yes'
+    source: 260
+    target: 262
+  - oneway: 'yes'
+    source: 260
+    target: 259
+  - oneway: 'yes'
+    source: 259
+    target: 258
+  - oneway: 'yes'
+    source: 259
+    target: 257
+  - oneway: 'yes'
+    source: 258
+    target: 252
+  - oneway: 'yes'
+    source: 257
+    target: 252
+  - oneway: 'yes'
+    source: 251
+    target: 249
+  - oneway: 'yes'
+    source: 251
+    target: 252
+  - oneway: 'yes'
+    source: 250
+    target: 252
+  - oneway: 'yes'
+    source: 250
+    target: 248
+  - oneway: 'yes'
+    source: 249
+    target: 247
+  - oneway: 'yes'
+    source: 248
+    target: 247
+  - oneway: 'no'
+    source: 246
+    target: 245
+  - oneway: 'yes'
+    source: 246
+    target: 247
+  - oneway: 'yes'
+    source: 245
+    target: 247
+  - oneway: 'yes'
+    source: 285
+    target: 26
+  - oneway: 'yes'
+    source: 285
+    target: 93
+  - oneway: 'yes'
+    source: 286
+    target: 26
+  - oneway: 'yes'
+    source: 286
+    target: 93
+  - oneway: 'no'
+    source: 120
+    target: 119
+  - oneway: 'no'
+    source: 120
+    target: 196
+  - oneway: 'no'
+    source: 120
+    target: 263
+  - oneway: 'no'
+    source: 196
+    target: 122
+  - oneway: 'no'
+    source: 119
+    target: 118
+  - oneway: 'no'
+    source: 119
+    target: 263
+  - oneway: 'no'
+    source: 118
+    target: 117
+  - oneway: 'no'
+    source: 118
+    target: 266
+  - oneway: 'no'
+    source: 117
+    target: 265
+  - oneway: 'yes'
+    source: 93
+    target: 18
+  - oneway: 'yes'
+    source: 93
+    target: 14
+  - oneway: 'yes'
+    source: 93
+    target: 15
+  - oneway: 'yes'
+    source: 93
+    target: 19
+  - oneway: 'yes'
+    source: 14
+    target: 17
+  - oneway: 'yes'
+    source: 15
+    target: 16
+  - oneway: 'yes'
+    source: 18
+    target: 21
+  - oneway: 'yes'
+    source: 19
+    target: 20
+  - oneway: 'yes'
+    source: 17
+    target: 25
+  - oneway: 'yes'
+    source: 16
+    target: 24
+  - oneway: 'yes'
+    source: 21
+    target: 22
+  - oneway: 'yes'
+    source: 20
+    target: 23
+  - oneway: 'yes'
+    source: 25
+    target: 26
+  - oneway: 'yes'
+    source: 24
+    target: 26
+  - oneway: 'yes'
+    source: 22
+    target: 26
+  - oneway: 'yes'
+    source: 23
+    target: 26
+  - oneway: 'no'
+    source: 263
+    target: 262
+  - oneway: 'no'
+    source: 263
+    target: 266
+  - oneway: 'no'
+    source: 265
+    target: 264
+  - oneway: 'no'
+    source: 264
+    target: 262
+multigraph: false
+nodes:
+  - behaviour: ''
+    id: 113
+    name: extra
+    pose:
+      - 57.56583
+      - 31.21215
+  - behaviour: ''
+    id: 68
+    name: BRSU_C_L0_C6_LA1
+    parent_id: 8
+    pose:
+      - 31.628070182108786
+      - 33.555935758166015
+    type: corridor
+  - behaviour: ''
+    id: 67
+    name: BRSU_C_L0_C6_LA2
+    parent_id: 8
+    pose:
+      - 31.603472058661282
+      - 32.555240106768906
+    type: corridor
+  - behaviour: door
+    id: 89
+    name: BRSU_C_L0_C6_Door1
+    parent_id: 8
+    pose:
+      - 39.97627831855789
+      - 32.85008481796831
+    type: corridor
+  - behaviour: ''
+    id: 58
+    name: BRSU_C_L0_RoomC022_LA1
+    parent_id: 4
+    pose:
+      - 59.554013625893276
+      - 28.708604216575623
+    type: room
+  - behaviour: door
+    id: 209
+    name: BRSU_C_L0_RoomC022_Door2
+    parent_id: 5
+    pose:
+      - 60.71333127300022
+      - 29.959552352316678
+    type: corridor
+  - behaviour: door
+    id: 88
+    name: BRSU_C_L0_RoomC022_Door1
+    parent_id: 5
+    pose:
+      - 59.50029914354673
+      - 29.967112152837217
+    type: corridor
+  - behaviour: ''
+    id: 59
+    name: BRSU_C_L0_RoomC025_LA1
+    parent_id: 3
+    pose:
+      - 59.23817496513948
+      - 35.947977848351
+    type: room
+  - behaviour: door
+    id: 87
+    name: BRSU_C_L0_RoomC025_Door1
+    parent_id: 5
+    pose:
+      - 59.59724865085445
+      - 33.62503761332482
+    type: corridor
+  - behaviour: ''
+    id: 44
+    name: BRSU_C_L0_RoomC069_LA1
+    parent_id: 110
+    pose:
+      - 51.09743141103536
+      - 70.63727750908583
+    type: room
+  - behaviour: door
+    id: 84
+    name: BRSU_C_L0_RoomC069_Door1
+    parent_id: 110
+    pose:
+      - 50.96381821401883
+      - 69.50575449503958
+    type: room
+  - behaviour: ''
+    id: 77
+    name: BRSU_C_L0_C1_LA1
+    parent_id: 13
+    pose:
+      - 0.652356181293726
+      - 28.25401165150106
+    type: corridor
+  - behaviour: ''
+    id: 76
+    name: BRSU_C_L0_C1_LA2
+    parent_id: 13
+    pose:
+      - 2.8533900901675224
+      - 28.266648828051984
+    type: corridor
+  - behaviour: door
+    id: 91
+    name: BRSU_C_L0_C1_Door1
+    parent_id: 13
+    pose:
+      - 1.7495948381256312
+      - 24.110576351173222
+    type: corridor
+  - behaviour: ''
+    id: 74
+    name: BRSU_C_L0_C3_LA1
+    parent_id: 11
+    pose:
+      - 1.2922407955047674
+      - 39.07457580789924
+    type: corridor
+  - behaviour: ''
+    id: 73
+    name: BRSU_C_L0_C3_LA2
+    parent_id: 11
+    pose:
+      - 3.087631431990303
+      - 38.94142855796963
+    type: corridor
+  - behaviour: door
+    id: 80
+    name: BRSU_C_L0_C3_Door1
+    parent_id: 11
+    pose:
+      - 2.1604973861249164
+      - 42.257389885373414
+    type: corridor
+  - behaviour: ''
+    id: 72
+    name: BRSU_C_L0_C4_LA1
+    parent_id: 10
+    pose:
+      - 6.172937135852408
+      - 34.181711233220994
+    type: corridor
+  - behaviour: ''
+    id: 71
+    name: BRSU_C_L0_C4_LA2
+    parent_id: 10
+    pose:
+      - 6.104671296663582
+      - 33.126461307518184
+    type: corridor
+  - behaviour: door
+    id: 90
+    name: BRSU_C_L0_C4_Door1
+    parent_id: 10
+    pose:
+      - 7.909143133263569
+      - 33.64950063172728
+    type: corridor
+  - behaviour: ''
+    id: 70
+    name: BRSU_C_L0_C5_LA1
+    parent_id: 9
+    pose:
+      - 16.17648392508272
+      - 33.9580256305635
+    type: corridor
+  - behaviour: ''
+    id: 69
+    name: BRSU_C_L0_C5_LA2
+    parent_id: 9
+    pose:
+      - 16.208277488825843
+      - 32.9559435993433
+    type: corridor
+  - behaviour: ''
+    id: 66
+    name: BRSU_C_L0_C7_LA1
+    parent_id: 92
+    pose:
+      - 45.64782290463336
+      - 33.15570694208145
+    type: corridor
+  - behaviour: ''
+    id: 65
+    name: BRSU_C_L0_C7_LA2
+    parent_id: 92
+    pose:
+      - 45.526176517712884
+      - 32.22414996754378
+    type: corridor
+  - behaviour: ''
+    id: 61
+    name: BRSU_C_L0_C9_LA1
+    parent_id: 5
+    pose:
+      - 59.86736155441031
+      - 32.561471559107304
+    type: corridor
+  - behaviour: ''
+    id: 60
+    name: BRSU_C_L0_C9_LA2
+    parent_id: 5
+    pose:
+      - 59.360353188123554
+      - 31.16098595224321
+    type: corridor
+  - behaviour: door
+    id: 235
+    name: BRSU_C_L0_RoomC025_Door2
+    parent_id: 5
+    pose:
+      - 60.76743744802661
+      - 33.5962795810774
+    type: corridor
+  - behaviour: door
+    id: 237
+    name: BRSU_C_L0_C9_Door1
+    parent_id: 5
+    pose:
+      - 55.787212409835774
+      - 30.13624389655888
+    type: corridor
+  - behaviour: door
+    id: 241
+    name: BRSU_C_L0_C9_Door2
+    parent_id: 5
+    pose:
+      - 63.75504039955558
+      - 32.32129873801023
+    type: corridor
+  - behaviour:
+      - undocking
+    id: 63
+    name: BRSU_C_L0_C10_LA1
+    parent_id: 6
+    pose:
+      - 52.790906713111326
+      - 27.039099333807826
+    type: corridor
+  - behaviour:
+      - docking
+    id: 62
+    name: BRSU_C_L0_C10_LA2
+    parent_id: 6
+    pose:
+      - 54.07257564738393
+      - 27.241236716508865
+    type: corridor
+  - behaviour: ''
+    id: 56
+    name: BRSU_C_L0_C11_LA1
+    parent_id: 2
+    pose:
+      - 50.24722696997924
+      - 37.19249615352601
+    type: corridor
+  - behaviour: ''
+    id: 57
+    name: BRSU_C_L0_C11_LA2
+    parent_id: 2
+    pose:
+      - 51.4050116854487
+      - 37.52005868125707
+    type: corridor
+  - behaviour: door
+    id: 86
+    name: BRSU_C_L0_C11_Door1
+    parent_id: 2
+    pose:
+      - 50.20122805185383
+      - 40.48679167032242
+    type: corridor
+  - behaviour: ''
+    id: 55
+    name: BRSU_C_L0_C12_LA1
+    parent_id: 1
+    pose:
+      - 48.57154290098697
+      - 45.06607303023338
+    type: corridor
+  - behaviour: ''
+    id: 54
+    name: BRSU_C_L0_C12_LA2
+    parent_id: 1
+    pose:
+      - 49.48014053987572
+      - 45.29962954111397
+    type: corridor
+  - behaviour: ''
+    id: 53
+    name: BRSU_C_L0_C13_LA1
+    parent_id: 115
+    pose:
+      - 46.15870084572816
+      - 54.515346981585026
+    type: corridor
+  - behaviour: ''
+    id: 52
+    name: BRSU_C_L0_C13_LA2
+    parent_id: 115
+    pose:
+      - 47.179539259232115
+      - 54.72389322053641
+    type: corridor
+  - behaviour: ''
+    id: 51
+    name: BRSU_C_L0_C14_LA1
+    parent_id: 114
+    pose:
+      - 44.06635831564199
+      - 62.65505470428616
+    type: corridor
+  - behaviour: ''
+    id: 50
+    name: BRSU_C_L0_C14_LA2
+    parent_id: 114
+    pose:
+      - 45.2509686651174
+      - 62.92632852960378
+    type: corridor
+  - behaviour: door
+    id: 85
+    name: BRSU_C_L0_C14_Door1
+    parent_id: 114
+    pose:
+      - 45.57264958473388
+      - 59.369368995539844
+    type: corridor
+  - behaviour: ''
+    id: 42
+    name: BRSU_C_L0_C16_LA1
+    parent_id: 109
+    pose:
+      - 41.830096181307454
+      - 72.40038155112416
+    type: corridor
+  - behaviour: ''
+    id: 43
+    name: BRSU_C_L0_C16_LA2
+    parent_id: 109
+    pose:
+      - 42.95098769874312
+      - 72.66209538653493
+    type: corridor
+  - behaviour: ''
+    id: 47
+    name: BRSU_C_L0_C17_LA1
+    parent_id: 112
+    pose:
+      - 47.35173407976981
+      - 67.46955049224198
+    type: corridor
+  - behaviour: ''
+    id: 48
+    name: BRSU_C_L0_C17_LA2
+    parent_id: 112
+    pose:
+      - 47.33287762606051
+      - 66.70235043764114
+    type: corridor
+  - behaviour:
+      - undocking
+    id: 46
+    name: BRSU_C_L0_C18_LA1
+    parent_id: 111
+    pose:
+      - 51.16365164308809
+      - 68.16577613167465
+    type: corridor
+  - behaviour:
+      - docking
+    id: 45
+    name: BRSU_C_L0_C18_LA2
+    parent_id: 111
+    pose:
+      - 51.77775339910295
+      - 66.74886276945472
+    type: corridor
+  - behaviour: ''
+    id: 41
+    name: BRSU_C_L0_C19_LA1
+    parent_id: 108
+    pose:
+      - 41.386455957370345
+      - 67.83868133276701
+    type: corridor
+  - behaviour: ''
+    id: 40
+    name: BRSU_C_L0_C19_LA2
+    parent_id: 108
+    pose:
+      - 41.38464706012746
+      - 66.90417886525393
+    type: corridor
+  - behaviour: ''
+    id: 38
+    name: BRSU_C_L0_C20_LA1
+    parent_id: 107
+    pose:
+      - 37.80001011409331
+      - 67.99358869157732
+    type: corridor
+  - behaviour: ''
+    id: 39
+    name: BRSU_C_L0_C20_LA2
+    parent_id: 107
+    pose:
+      - 37.75371844187612
+      - 66.97117511834949
+    type: corridor
+  - behaviour: door
+    id: 83
+    name: BRSU_C_L0_C20_Door1
+    parent_id: 107
+    pose:
+      - 40.80939501704415
+      - 67.31883837003261
+    type: corridor
+  - behaviour: ''
+    id: 37
+    name: BRSU_C_L0_C21_LA1
+    parent_id: 106
+    pose:
+      - 28.261508844909258
+      - 68.1946781789884
+    type: corridor
+  - behaviour: ''
+    id: 36
+    name: BRSU_C_L0_C21_LA2
+    parent_id: 106
+    pose:
+      - 28.300900015165098
+      - 67.21466060169041
+    type: corridor
+  - behaviour: ''
+    id: 34
+    name: BRSU_C_L0_C22_LA1
+    parent_id: 105
+    pose:
+      - 15.283777080476284
+      - 68.51371221616864
+    type: corridor
+  - behaviour: ''
+    id: 35
+    name: BRSU_C_L0_C22_LA2
+    parent_id: 105
+    pose:
+      - 15.287099334760569
+      - 67.50120449252427
+    type: corridor
+  - behaviour: ''
+    id: 33
+    name: BRSU_C_L0_C23_LA1
+    parent_id: 104
+    pose:
+      - 6.949063269014005
+      - 68.61849306058139
+    type: corridor
+  - behaviour: ''
+    id: 32
+    name: BRSU_C_L0_C23_LA2
+    parent_id: 104
+    pose:
+      - 6.926647077663802
+      - 67.70674812793732
+    type: corridor
+  - behaviour: door
+    id: 82
+    name: BRSU_C_L0_C23_Door1
+    parent_id: 104
+    pose:
+      - 8.756570588273462
+      - 68.11790591385216
+    type: corridor
+  - behaviour: ''
+    id: 30
+    name: BRSU_C_L0_C25_LA1
+    parent_id: 102
+    pose:
+      - 1.7145697858650237
+      - 73.46442950423807
+    type: corridor
+  - behaviour: ''
+    id: 31
+    name: BRSU_C_L0_C25_LA2
+    parent_id: 102
+    pose:
+      - 3.9364590741461143
+      - 73.46542802359909
+    type: corridor
+  - behaviour: ''
+    id: 28
+    name: BRSU_C_L0_C26_LA1
+    parent_id: 101
+    pose:
+      - 1.6789133487036452
+      - 63.4077980061993
+    type: corridor
+  - behaviour: ''
+    id: 27
+    name: BRSU_C_L0_C26_LA2
+    parent_id: 101
+    pose:
+      - 3.7519516826723702
+      - 63.379079738631845
+    type: corridor
+  - behaviour: door
+    id: 81
+    name: BRSU_C_L0_C26_Door1
+    parent_id: 101
+    pose:
+      - 2.634454512852244
+      - 59.812998816370964
+    type: corridor
+  - behaviour:
+      - undocking
+    id: 75
+    name: BRSU_C_L0_C2_LA1
+    parent_id: 12
+    pose:
+      - 1.9478693400742486
+      - 33.896195443347096
+    type: junction
+  - behaviour: ''
+    id: 64
+    name: BRSU_C_L0_C8_LA1
+    parent_id: 7
+    pose:
+      - 51.93139825144317
+      - 32.53399753011763
+    type: junction
+  - behaviour: ''
+    id: 49
+    name: BRSU_C_L0_C15_LA1
+    parent_id: 113
+    pose:
+      - 43.691459403024055
+      - 67.20349714811891
+    type: junction
+  - behaviour: ''
+    id: 29
+    name: BRSU_C_L0_C24_LA1
+    parent_id: 103
+    pose:
+      - 2.5114512493018992
+      - 68.29370131436735
+    type: junction
+  - behaviour: ''
+    id: 261
+    name: BRSU_A_L0_C1_LA1
+    parent_id: 276
+    pose:
+      - -26.93236867908854
+      - 4.8120862897485495
+    type: corridor
+  - behaviour: ''
+    id: 260
+    name: BRSU_A_L0_C1_LA2
+    parent_id: 276
+    pose:
+      - -27.042237024288625
+      - 3.2127070454880595
+    type: corridor
+  - behaviour: ''
+    id: 259
+    name: BRSU_A_L0_C2_LA1
+    parent_id: 268
+    pose:
+      - -41.68579038511962
+      - 4.351632013916969
+    type: corridor
+  - behaviour: ''
+    id: 256
+    name: BRSU_A_L0_C3_LA1
+    parent_id: 279
+    pose:
+      - -52.62737609248143
+      - 10.317039892077446
+    type: corridor
+  - behaviour: ''
+    id: 255
+    name: BRSU_A_L0_C3_LA2
+    parent_id: 279
+    pose:
+      - -52.69708267424721
+      - 8.916933180764318
+    type: corridor
+  - behaviour: ''
+    id: 258
+    name: BRSU_A_L0_C4_LA1
+    parent_id: 267
+    pose:
+      - -53.90064945910126
+      - 5.008087165653706
+    type: corridor
+  - behaviour: ''
+    id: 257
+    name: BRSU_A_L0_C4_LA2
+    parent_id: 267
+    pose:
+      - -53.92669265932636
+      - 3.662534302100539
+    type: corridor
+  - behaviour: ''
+    id: 251
+    name: BRSU_A_L0_C7_LA1
+    parent_id: 273
+    pose:
+      - -79.15520102658775
+      - 6.052111390046775
+    type: corridor
+  - behaviour: ''
+    id: 250
+    name: BRSU_A_L0_C7_LA2
+    parent_id: 273
+    pose:
+      - -79.2095110748196
+      - 4.417989039793611
+    type: corridor
+  - behaviour: ''
+    id: 249
+    name: BRSU_A_L0_C8_LA1
+    parent_id: 281
+    pose:
+      - -89.87920841044979
+      - 6.238076106645167
+    type: corridor
+  - behaviour: ''
+    id: 248
+    name: BRSU_A_L0_C8_LA2
+    parent_id: 281
+    pose:
+      - -89.92805043922272
+      - 4.826330571435392
+    type: corridor
+  - behaviour: ''
+    id: 246
+    name: BRSU_A_L0_C10_LA1
+    parent_id: 280
+    pose:
+      - -104.61923251685221
+      - 6.322622987441719
+    type: corridor
+  - behaviour:
+      - docking
+    id: 245
+    name: BRSU_A_L0_C10_LA2
+    parent_id: 280
+    pose:
+      - -104.68032632296672
+      - 4.699793071486056
+    type: corridor
+  - behaviour: ''
+    id: 285
+    name: BRSU_C_L0_A50_LA2
+    parent_id: 287
+    pose:
+      - 1.5482002230128273
+      - 51.20627039577812
+    type: area
+  - behaviour: ''
+    id: 286
+    name: BRSU_C_L0_A50_LA1
+    parent_id: 287
+    pose:
+      - 2.4025333252502605
+      - 51.24089284334332
+    type: area
+  - behaviour:
+      - undocking
+    id: 120
+    name: BRSU_A_L0_A1_LA1
+    parent_id: 125
+    pose:
+      - 0.30786640907172114
+      - 3.3412244031205773
+    type: area
+  - behaviour: door
+    id: 196
+    name: BRSU_A_L0_A1_Door1
+    parent_id: 125
+    pose:
+      - 0.06154949648771435
+      - 1.3558051334694028
+    type: area
+  - behaviour: ''
+    id: 119
+    name: BRSU_C_L0_A2_LA1
+    parent_id: 126
+    pose:
+      - 1.1697422685101628
+      - 7.124975562095642
+    type: junction
+  - behaviour: ''
+    id: 118
+    name: BRSU_C_L0_A3_LA1
+    parent_id: 124
+    pose:
+      - 1.3116824115859345
+      - 13.184916505590081
+    type: area
+  - behaviour: door
+    id: 79
+    name: BRSU_C_L0_A3_Door1
+    parent_id: 124
+    pose:
+      - 3.8779807350365445
+      - 13.422210525721312
+    type: area
+  - behaviour: ''
+    id: 117
+    name: BRSU_C_L0_A4_LA1
+    parent_id: 123
+    pose:
+      - 1.683106223179493
+      - 21.11943510733545
+    type: junction
+  - behaviour: ''
+    id: 93
+    name: BRSU_C_L0_A13_LA1
+    parent_id: 116
+    pose:
+      - 1.8792467803577892
+      - 43.15434986073524
+    type: junction
+  - behaviour: ''
+    id: 14
+    name: BRSU_C_L0_A14_LA1
+    parent_id: 94
+    pose:
+      - -0.661436727270484
+      - 44.81889868713915
+    type: area
+  - behaviour: ''
+    id: 15
+    name: BRSU_C_L0_A14_LA2
+    parent_id: 94
+    pose:
+      - -1.8438282235292718
+      - 43.490652080625296
+    type: area
+  - behaviour: ''
+    id: 18
+    name: BRSU_C_L0_A15_LA1
+    parent_id: 95
+    pose:
+      - 6.924918640463147
+      - 42.963541977107525
+    type: area
+  - behaviour: ''
+    id: 19
+    name: BRSU_C_L0_A15_LA2
+    parent_id: 95
+    pose:
+      - 6.073277545685414
+      - 44.186040975153446
+    type: area
+  - behaviour: ''
+    id: 17
+    name: BRSU_C_L0_A16_LA1
+    parent_id: 97
+    pose:
+      - -0.12603963923174888
+      - 51.10280278325081
+    type: area
+  - behaviour: ''
+    id: 16
+    name: BRSU_C_L0_A16_LA2
+    parent_id: 97
+    pose:
+      - -1.5291252703173086
+      - 51.126175434328616
+    type: area
+  - behaviour: ''
+    id: 21
+    name: BRSU_C_L0_A17_LA1
+    parent_id: 96
+    pose:
+      - 7.123109095264226
+      - 51.024701219052076
+    type: area
+  - behaviour: ''
+    id: 20
+    name: BRSU_C_L0_A17_LA2
+    parent_id: 96
+    pose:
+      - 5.579857444798108
+      - 51.084894745610654
+    type: area
+  - behaviour: ''
+    id: 25
+    name: BRSU_C_L0_A18_LA1
+    parent_id: 99
+    pose:
+      - -0.3408762766630389
+      - 57.282771970145404
+    type: area
+  - behaviour: ''
+    id: 24
+    name: BRSU_C_L0_A18_LA2
+    parent_id: 99
+    pose:
+      - -1.2348676536348648
+      - 58.21704902127385
+    type: area
+  - behaviour: ''
+    id: 22
+    name: BRSU_C_L0_A19_LA1
+    parent_id: 98
+    pose:
+      - 7.4093286244315095
+      - 58.649799386039376
+    type: area
+  - behaviour: ''
+    id: 23
+    name: BRSU_C_L0_A19_LA2
+    parent_id: 98
+    pose:
+      - 5.99595549935475
+      - 57.39398343954235
+    type: area
+  - behaviour: ''
+    id: 26
+    name: BRSU_C_L0_A20_LA1
+    parent_id: 100
+    pose:
+      - 2.250609833339695
+      - 58.83226132951677
+    type: junction
+  - behaviour:
+      - waiting
+    id: 263
+    name: BRSU_A_L0_A8_LA1
+    parent_id: 272
+    pose:
+      - -4.963462307408918
+      - 4.683518352918327
+    type: area
+  - behaviour: ''
+    id: 266
+    name: BRSU_A_L0_A9_LA1
+    parent_id: 282
+    pose:
+      - -3.1500737218302675
+      - 13.02760471124202
+    type: area
+  - behaviour: ''
+    id: 265
+    name: BRSU_A_L0_A10_LA1
+    parent_id: 269
+    pose:
+      - -4.596613647823688
+      - 20.750934896990657
+    type: area
+  - behaviour: ''
+    id: 254
+    name: BRSU_A_L0_A11_LA1
+    parent_id: 271
+    pose:
+      - -58.373101369594224
+      - 8.144252910278738
+    type: area
+  - behaviour: ''
+    id: 264
+    name: BRSU_A_L0_A13_LA1
+    parent_id: 270
+    pose:
+      - -11.58619858766906
+      - 16.183309056796134
+    type: area
+  - behaviour: ''
+    id: 262
+    name: BRSU_A_L0_A12_LA1
+    parent_id: 274
+    pose:
+      - -11.857281164673623
+      - 3.15081587433815
+    type: junction
+  - behaviour: ''
+    id: 253
+    name: BRSU_A_L0_C5_LA1
+    parent_id: 275
+    pose:
+      - -60.45419905666495
+      - 12.434285163879395
+    type: junction
+  - behaviour: ''
+    id: 252
+    name: BRSU_A_L0_C6_LA1
+    parent_id: 278
+    pose:
+      - -67.08631810708903
+      - 4.909662927500904
+    type: junction
+  - behaviour:
+      - undocking
+    id: 247
+    name: BRSU_A_L0_C9_LA1
+    parent_id: 277
+    pose:
+      - -98.43897732137702
+      - 5.514140844345093
+    type: junction
+  - behaviour: ''
+    id: 122
+    name: BRSU_A_E1_LA1
+    parent_id: 121
+    pose:
+      - 0.020054622902534902
+      - -0.04499532375484705
+    type: elevator

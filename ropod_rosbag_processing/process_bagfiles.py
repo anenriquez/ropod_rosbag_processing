@@ -9,7 +9,6 @@ from ropod_rosbag_processing.utils.utils import load_yaml
 
 MERGED_BAGFILES_DIR = '/home/ropod/merged_bags/'
 PROCESSED_DIR = '/home/ropod/processed_bags/'
-NODES_FILE = 'config/nodes.yaml'
 
 
 def get_joined_bagfiles(path):
@@ -22,44 +21,48 @@ def get_joined_bagfiles(path):
     return bagfiles
 
 
-def get_config_files(path):
-    config_files = list()
-    for root, directories, files in os.walk(path):
-        for file in files:
-            if file.endswith('.yaml'):
-                config_files.append(os.path.join(root, file))
-    return config_files
+def get_travel_loggers(path):
+    travel_loggers = list()
+
+    # map_directories = [x[0] for x in os.walk(path)]
+    # map_directories = map_directories[1:]
+
+    map_directories = ['config/maps/osm']
+    print("map directories: ", map_directories)
+
+    for directory in map_directories:
+        config = load_yaml(directory + "/edges.yaml")
+        nodes = load_yaml(directory + "/nodes.yaml")
+        for logger_name, logger_config in config.items():
+            print("Logger name: ", logger_name)
+            travel_logger = get_travel_logger(logger_name, logger_config, nodes)
+            travel_loggers.append(travel_logger)
+    return travel_loggers
 
 
-def parse_config_file(config_file):
-    config_params = load_yaml(config_file)
-    config_params = get_nodes(config_params)
-    config_params = get_edges(config_params)
-    return config_params
+def get_travel_logger(logger_name, logger_config, nodes):
+    nodes_of_interest = get_nodes_of_interest(nodes, logger_config)
+    edges_of_interest = get_edges_of_interest(logger_config)
+    logger_config.update(logger_name=logger_name)
+    logger_config.update(nodes_of_interest=nodes_of_interest)
+    logger_config.update(edges_of_interest=edges_of_interest)
+    return TravelLogger(**logger_config)
 
 
-def get_nodes(config_params):
-    all_nodes = load_yaml(NODES_FILE)
+def get_nodes_of_interest(nodes, logger_config):
     nodes_of_interest = dict()
-    edges = config_params.get('edges')
-
-    for edge in edges:
-        nodes_of_interest[edge[0]] = all_nodes.get(edge[0])
-        nodes_of_interest[edge[1]] = all_nodes.get((edge[1]))
-
-    nodes_obj = TravelNode.get_travel_nodes(nodes_of_interest)
-    config_params.update(nodes_of_interest=nodes_obj)
-    return config_params
+    for edge in logger_config.get("edges"):
+        nodes_of_interest[str(edge[0])] = nodes.get(edge[0])
+        nodes_of_interest[str(edge[1])] = nodes.get(edge[1])
+    return TravelNode.get_travel_nodes(nodes_of_interest)
 
 
-def get_edges(config_params):
-    edges_list = config_params.pop('edges')
-    edge_names = list()
-    for edge in edges_list:
-        edge_names.append(edge[0] + '_to_' + edge[1])
-        edge_names.append(edge[1] + '_to_' + edge[0])
-    config_params.update(edges_of_interest=edge_names)
-    return config_params
+def get_edges_of_interest(logger_config):
+    edges_of_interest = list()
+    for edge in logger_config.get("edges"):
+        edges_of_interest.append(str(edge[0]) + '_to_' + str(edge[1]))
+        edges_of_interest.append(str(edge[1]) + '_to_' + str(edge[0]))
+    return edges_of_interest
 
 
 def update_travel_logger(bagfile, travel_loggers):
@@ -88,26 +91,12 @@ def update_travel_logger(bagfile, travel_loggers):
 
 
 def process():
-    config_files_angela = get_config_files('config/angela/')
-    config_files_ethan = get_config_files('config/ethan/')
-    config_files = config_files_angela + config_files_ethan
-    print(config_files)
     bagfiles = get_joined_bagfiles(MERGED_BAGFILES_DIR)
-    print("N of bagfiles to process:", len(bagfiles))
-
-    configs = list()
-
-    for config_file in config_files:
-        config = parse_config_file(config_file)
-        configs.append(config)
 
     for bagfile in bagfiles:
         print("Processing bagfile: ", bagfile)
 
-        travel_loggers = list()
-
-        for config in configs:
-            travel_loggers.append(TravelLogger(**config))
+        travel_loggers = get_travel_loggers('config/maps/')
 
         update_travel_logger(bagfile, travel_loggers)
 
