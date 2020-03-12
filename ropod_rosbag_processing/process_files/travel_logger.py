@@ -156,10 +156,7 @@ class TravelLogger:
 
             check_path_existence(out_dir)
 
-            filtered_obstacle_samples = \
-                ObstacleInfo.dedupe(travel_obstacle_list[0].obstacle_samples, self.min_distance_static_samples)
-
-            ObstacleInfo.to_file(out_dir + "/static.csv", filtered_obstacle_samples)
+            ObstacleInfo.to_file(out_dir + "/static.csv", travel_obstacle_list[0].obstacle_samples)
 
     def dynamic_obstacles_to_file(self):
         for edge_name, travel_obstacle_list in self.travel_obstacles.items():
