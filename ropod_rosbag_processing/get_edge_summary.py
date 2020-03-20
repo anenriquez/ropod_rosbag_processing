@@ -86,7 +86,7 @@ def remove_outliers(durations):
 
 
 # dir_name: keep_outliers
-dir_names = {'angela': False}
+dir_names = {'osm': False}
 
 if __name__ == '__main__':
 

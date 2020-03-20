@@ -152,6 +152,6 @@ bidder_radius_2:
     - [119, 263]
     - [263, 262]
   base_dir: 'osm'
-  event_radius: 2.5
+  event_radius: 2
   event_threshold: 0.1
   min_distance_static_samples: 0.5

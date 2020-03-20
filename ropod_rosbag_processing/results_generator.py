@@ -90,7 +90,7 @@ class EdgeObservations:
 
 
 
-dir_names = ['ethan', 'angela']
+dir_names = ['osm']
 #dir_names = ['ethan']
 path = ''
 
