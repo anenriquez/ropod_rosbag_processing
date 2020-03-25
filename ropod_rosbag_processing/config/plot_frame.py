@@ -27,7 +27,7 @@ def plot(graph, occ_grid, meta_data, map_name, pos='pose'):
     pos_ = {p: map_to_img(coord[0], coord[1]) for p, coord in pose.items()}
 
     nx.draw_networkx(graph, pos=pos_, node_size=1 / resolution, ax=ax, font_size=6)
-    plt.savefig("maps/" + map_name + "/roadmap_complete.png", dpi=300, bbox_inches='tight')
+    plt.savefig("maps/" + map_name + "/roadmap.png", dpi=300, bbox_inches='tight')
     plt.show()
 
 
@@ -39,7 +39,5 @@ if __name__ == '__main__':
     occ_grid = imread('map.pgm', True)
     meta_data = nx.read_yaml('map.yaml')
 
-    data = nx.read_yaml('maps/' + map_name + '/topology_updated.yaml')
-    G = nx.node_link_graph(data)
-
+    G = load_graph_from_file('maps/osm/osm.json')
     plot(G, occ_grid, meta_data, map_name)
